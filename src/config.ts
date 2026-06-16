@@ -19,4 +19,4 @@ export const SITE = {
 // Cloudflare Web Analytics token. Paste the token from your Cloudflare
 // dashboard here (Account → Web Analytics → your site → "Manage site").
 // Leaving it empty disables the snippet. Cookieless, no personal data.
-export const CLOUDFLARE_ANALYTICS_TOKEN = '';
+export const CLOUDFLARE_ANALYTICS_TOKEN = '107d6094b8b0448a8b78fafc11952d27';
