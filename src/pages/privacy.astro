@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+
+const updated = 'June 2026';
+---
+
+<Layout title="Privacy" description="How Allocate handles your data: on-device storage, iCloud sync, no account, no backend.">
+  <section class="section prose-section">
+    <div class="container prose">
+      <p class="eyebrow">Privacy</p>
+      <h1>Privacy Policy</h1>
+      <p class="text-muted">Last updated: {updated}</p>
+
+      <p>
+        {SITE.name} is built so that your financial data stays yours. This page
+        explains, in plain language, what the app does and does not do with your
+        information.
+      </p>
+
+      <h2>The short version</h2>
+      <ul>
+        <li>Your transactions are stored on your Mac and synced through your own iCloud.</li>
+        <li>There is no {SITE.name} account and no custom backend server that holds your data.</li>
+        <li>We do not sell, share, or monetize your financial information.</li>
+        <li>You can export everything to CSV and delete it at any time.</li>
+      </ul>
+
+      <h2>What data the app stores</h2>
+      <p>
+        When you import a bank statement, {SITE.name} extracts transactions —
+        dates, descriptions, amounts, and categories — and stores them locally
+        on your device using Apple's SwiftData. If you enable iCloud, this data
+        syncs to your personal iCloud account so it is available across your
+        devices. It is never sent to servers operated by {SITE.name}.
+      </p>
+
+      <h2>AI categorization</h2>
+      <p>
+        {SITE.name} uses an AI agent to categorize transactions. Where this
+        processing requires a cloud model, only the data needed to categorize a
+        statement is sent for that purpose, and it is not used to identify you or
+        build a profile. During development the app runs entirely locally with a
+        mock extraction service. This policy will be updated with specifics
+        before any cloud processing is enabled in a public release.
+      </p>
+
+      <h2>Analytics on this website</h2>
+      <p>
+        This website may use a privacy-friendly, cookieless analytics service
+        (Cloudflare Web Analytics) to count aggregate page views and downloads.
+        It does not use cookies, does not track you across sites, and does not
+        collect personally identifiable information. It tells us how many people
+        visit — never who they are.
+      </p>
+
+      <h2>Identification &amp; rate limiting</h2>
+      <p>
+        A future release may use anonymous device authentication purely to
+        rate-limit automated abuse of the AI service. This identifies a device,
+        not a person, and is not linked to your financial data.
+      </p>
+
+      <h2>Your control</h2>
+      <p>
+        Because your data lives on your own device and iCloud, you are always in
+        control. Export it to CSV whenever you like, or delete it from the app
+        and from iCloud to remove it entirely.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about privacy? Open an issue on the
+        <a href={SITE.appRepo} target="_blank" rel="noopener noreferrer">project repository</a>.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose {
+    max-width: 720px;
+  }
+  .prose h2 {
+    font-size: 1.5rem;
+    margin-top: var(--space-2xl);
+  }
+  .prose ul {
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+    display: grid;
+    gap: var(--space-xs);
+  }
+  .prose p {
+    color: var(--text-muted);
+  }
+</style>

@@ -1,0 +1,335 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Feature from '../components/Feature.astro';
+import ScreenshotPlaceholder from '../components/ScreenshotPlaceholder.astro';
+import { icons } from '../components/icons';
+import { SITE } from '../config';
+
+const features = [
+  {
+    icon: icons.sparkles,
+    title: 'AI categorizes every transaction',
+    body: 'Drop in a statement and an on-device-guided AI agent reads each line, assigns a category by purpose, and learns your rules — so a grocery refund still counts as groceries.',
+  },
+  {
+    icon: icons.donut,
+    title: 'Pay-yourself-first dashboard',
+    body: 'See the one number that matters: how much of your income you actually kept. Saved and invested, as a share of what you earned, every period.',
+  },
+  {
+    icon: icons.doc,
+    title: 'PDF, CSV, or Excel',
+    body: 'Bring statements in whatever format your bank exports. Allocate handles the parsing and normalizes everything into clean, signed transactions.',
+  },
+  {
+    icon: icons.lock,
+    title: 'On your Mac, no account',
+    body: 'No sign-up, no custom backend, no servers holding your finances. Everything lives in local storage and your private iCloud.',
+  },
+  {
+    icon: icons.tag,
+    title: 'Rules that stick',
+    body: 'Map keywords to categories once. Rules apply at import and retroactively across your history — without ever overwriting a manual override.',
+  },
+  {
+    icon: icons.cloud,
+    title: 'Syncs through iCloud',
+    body: 'Your data follows you across your devices through your own iCloud account. You own it; you can export it to CSV anytime.',
+  },
+];
+
+const steps = [
+  {
+    n: '1',
+    title: 'Import a statement',
+    body: 'Export a PDF, CSV, or Excel file from your bank and drop it into Allocate.',
+  },
+  {
+    n: '2',
+    title: 'AI does the sorting',
+    body: 'Every transaction is read and categorized by purpose, guided by your own rules.',
+  },
+  {
+    n: '3',
+    title: 'See your real rate',
+    body: 'Your pay-yourself-first rate, spending, and savings appear on a clear dashboard.',
+  },
+];
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">macOS personal finance</p>
+        <h1>Pay yourself first.</h1>
+        <p class="lead">
+          Allocate turns a messy bank statement into a clear picture of what you
+          earned, what you spent, and how much you actually kept — automatically,
+          and entirely on your Mac.
+        </p>
+        <div class="hero__cta">
+          <Button href="/download">Get Allocate</Button>
+          <Button href="/#how" variant="secondary">See how it works</Button>
+        </div>
+        <p class="hero__note text-muted">
+          {SITE.requirements} · No account required · Your data stays private
+        </p>
+      </div>
+      <div class="hero__shot">
+        <ScreenshotPlaceholder title="Allocate — Dashboard" label="Dashboard screenshot coming soon" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="section section--subtle">
+    <div class="container problem">
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2>Your budget shouldn't live in a 30-column spreadsheet.</h2>
+        <p class="text-muted">
+          Tracking money by hand means copying rows, fixing categories, and
+          wrestling formulas every month. It's fragile, it's tedious, and it
+          breaks the moment you skip a week.
+        </p>
+        <p class="text-muted">
+          Allocate keeps the clarity of a well-built spreadsheet and throws away
+          the manual work. Import, and the math is already done.
+        </p>
+      </div>
+      <ScreenshotPlaceholder title="before.xlsx" label="The old way — a fragile spreadsheet" ratio="1100 / 720" />
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="center">
+        <p class="eyebrow">Features</p>
+        <h2>Everything you need to budget honestly.</h2>
+        <p class="lead">A focused set of tools built around one habit: paying yourself first.</p>
+      </div>
+      <div class="feature-grid">
+        {features.map((f) => <Feature icon={f.icon} title={f.title}>{f.body}</Feature>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="section section--subtle">
+    <div class="container">
+      <div class="center">
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps, then you're done.</h2>
+      </div>
+      <ol class="steps">
+        {
+          steps.map((s) => (
+            <li class="step">
+              <span class="step__n" aria-hidden="true">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p class="text-muted">{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <section id="privacy" class="section">
+    <div class="container privacy">
+      <div>
+        <p class="eyebrow">Privacy by design</p>
+        <h2>Your finances never leave your control.</h2>
+        <p class="text-muted">
+          Allocate has no custom backend and requires no account. Transactions
+          are stored on your device with SwiftData and synced only through your
+          own iCloud. There's nothing for us to see, sell, or lose.
+        </p>
+        <ul class="privacy__list">
+          <li>No sign-up, no email required to use the app</li>
+          <li>Data stored on-device and in your private iCloud</li>
+          <li>Export everything to CSV whenever you want</li>
+        </ul>
+        <p><a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/privacy`}>Read the full privacy policy →</a></p>
+      </div>
+      <div class="privacy__badge" aria-hidden="true">
+        <span set:html={icons.lock} />
+        <strong>On-device first</strong>
+        <span class="text-muted">No backend. No tracking of your money.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section--tight cta">
+    <div class="container center">
+      <h2>Start paying yourself first.</h2>
+      <p class="lead">Allocate is coming to macOS. Be the first to know when it ships.</p>
+      <div class="hero__cta center-cta">
+        <Button href="/download">Get Allocate</Button>
+        <Button href={SITE.appRepo} variant="secondary" external>View source on GitHub</Button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: var(--space-5xl) var(--space-4xl);
+    background:
+      radial-gradient(
+        120% 90% at 80% -10%,
+        color-mix(in srgb, var(--accent) 18%, transparent),
+        transparent 60%
+      );
+  }
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+  .hero__cta {
+    display: flex;
+    gap: var(--space-m);
+    flex-wrap: wrap;
+    margin-top: var(--space-l);
+  }
+  .hero__note {
+    margin-top: var(--space-l);
+    font-size: 0.9rem;
+  }
+
+  /* Problem */
+  .problem,
+  .privacy {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  /* Feature grid */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-l);
+    margin-top: var(--space-3xl);
+  }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin: var(--space-3xl) 0 0;
+    padding: 0;
+  }
+  .step {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-card);
+  }
+  .step__n {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 800;
+    margin-bottom: var(--space-l);
+  }
+  .step h3 {
+    margin-bottom: var(--space-s);
+  }
+  .step p {
+    margin: 0;
+  }
+
+  /* Privacy */
+  .privacy__list {
+    margin: var(--space-l) 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-s);
+  }
+  .privacy__list li {
+    position: relative;
+    padding-left: 1.8rem;
+    color: var(--text-muted);
+  }
+  .privacy__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 12px;
+    height: 7px;
+    border-left: 2.4px solid var(--success);
+    border-bottom: 2.4px solid var(--success);
+    transform: rotate(-45deg);
+  }
+  .privacy__badge {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-s);
+    text-align: center;
+    padding: var(--space-3xl);
+    border-radius: var(--radius-lg);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+  }
+  .privacy__badge :global(svg) {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-strong);
+  }
+  .privacy__badge strong {
+    font-size: 1.2rem;
+  }
+
+  /* CTA */
+  .cta {
+    background: var(--bg-subtle);
+    border-top: 1px solid var(--border);
+  }
+  .center-cta {
+    justify-content: center;
+    margin-top: var(--space-xl);
+  }
+
+  @media (max-width: 880px) {
+    .hero__inner,
+    .problem,
+    .privacy {
+      grid-template-columns: 1fr;
+    }
+    .hero__shot {
+      order: -1;
+    }
+    .feature-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

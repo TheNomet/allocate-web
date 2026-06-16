@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { SITE } from '../config';
+
+const steps = [
+  'Download the Allocate disk image (.dmg).',
+  'Open it and drag Allocate into your Applications folder.',
+  'Launch Allocate and import your first bank statement.',
+];
+---
+
+<Layout title="Download" description={`Download Allocate for macOS. ${SITE.requirements}.`}>
+  <section class="section download">
+    <div class="container center">
+      <p class="eyebrow">Download</p>
+
+      {
+        SITE.released ? (
+          <>
+            <h1>Get Allocate for macOS</h1>
+            <p class="lead">Free to download. Requires {SITE.requirements}.</p>
+            <div class="download__cta">
+              <Button href={SITE.releasesUrl} external>Download for macOS</Button>
+            </div>
+            <p class="text-muted download__meta">
+              Signed &amp; notarized · Hosted on GitHub Releases
+            </p>
+            <ol class="install">
+              {steps.map((s, i) => (
+                <li>
+                  <span class="install__n">{i + 1}</span>
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ol>
+          </>
+        ) : (
+          <>
+            <h1>Coming soon to macOS</h1>
+            <p class="lead">
+              Allocate is in active development. v1 ships as a signed, notarized
+              app for {SITE.requirements}. Watch the repository to be notified
+              the moment it's released.
+            </p>
+            <div class="download__cta">
+              <Button href={SITE.appRepo} external>Watch on GitHub</Button>
+              <Button href="/" variant="secondary">Back to overview</Button>
+            </div>
+            <p class="text-muted download__meta">
+              No account, no email required — just star or watch the repo.
+            </p>
+          </>
+        )
+      }
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .download__cta {
+    display: flex;
+    gap: var(--space-m);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--space-xl);
+  }
+  .download__meta {
+    margin-top: var(--space-l);
+    font-size: 0.9rem;
+  }
+  .install {
+    list-style: none;
+    counter-reset: install;
+    max-width: 460px;
+    margin: var(--space-3xl) auto 0;
+    padding: 0;
+    text-align: left;
+    display: grid;
+    gap: var(--space-m);
+  }
+  .install li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-l);
+  }
+  .install__n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent-strong);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+</style>

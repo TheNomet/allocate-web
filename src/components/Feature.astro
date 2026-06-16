@@ -1,0 +1,44 @@
+---
+interface Props {
+  icon?: string;
+  title: string;
+}
+const { icon, title } = Astro.props;
+---
+
+<article class="feature">
+  {icon && <div class="feature__icon" aria-hidden="true" set:html={icon} />}
+  <h3>{title}</h3>
+  <p class="text-muted"><slot /></p>
+</article>
+
+<style>
+  .feature {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-card);
+  }
+  .feature__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent-strong);
+    margin-bottom: var(--space-l);
+  }
+  .feature__icon :global(svg) {
+    width: 22px;
+    height: 22px;
+  }
+  .feature h3 {
+    margin-bottom: var(--space-s);
+  }
+  .feature p {
+    margin: 0;
+    font-size: 0.98rem;
+  }
+</style>

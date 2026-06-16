@@ -1,0 +1,61 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  external?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'primary', external = false, class: className = '' } = Astro.props;
+
+// Prefix internal (root-relative) links with the configured base path.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const isInternal = href.startsWith('/');
+const resolved = isInternal ? `${base}${href}` : href;
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+
+<a
+  href={resolved}
+  class:list={['btn', `btn--${variant}`, className]}
+  rel={rel}
+  target={target}
+>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: 0.7rem 1.4rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+    white-space: nowrap;
+  }
+  .btn:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+  .btn--primary {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  .btn--primary:hover {
+    background: var(--accent-strong);
+  }
+  .btn--secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn--secondary:hover {
+    border-color: var(--text-faint);
+  }
+</style>
