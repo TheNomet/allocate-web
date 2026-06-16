@@ -44,14 +44,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <!--
       Cloudflare Web Analytics (cookieless, privacy-first).
       Set CLOUDFLARE_ANALYTICS_TOKEN in src/config.ts to enable.
+
+      Self-exclusion: visit any page with ?analytics=off once per
+      browser/device to stop the beacon loading there (persisted in
+      localStorage). Use ?analytics=on to re-enable.
     -->
     {
       CLOUDFLARE_ANALYTICS_TOKEN && (
-        <script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={`{"token": "${CLOUDFLARE_ANALYTICS_TOKEN}"}`}
-        />
+        <script is:inline define:vars={{ token: CLOUDFLARE_ANALYTICS_TOKEN }}>
+          (function () {
+            try {
+              var p = new URLSearchParams(location.search).get('analytics');
+              if (p === 'off') localStorage.setItem('cf-analytics-opt-out', '1');
+              if (p === 'on') localStorage.removeItem('cf-analytics-opt-out');
+              if (localStorage.getItem('cf-analytics-opt-out') === '1') {
+                console.info('[analytics] disabled on this device');
+                return;
+              }
+            } catch (e) {
+              /* localStorage unavailable — fall through and load beacon */
+            }
+            var s = document.createElement('script');
+            s.defer = true;
+            s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+            s.setAttribute('data-cf-beacon', JSON.stringify({ token: token }));
+            document.head.appendChild(s);
+          })();
+        </script>
       )
     }
   </head>

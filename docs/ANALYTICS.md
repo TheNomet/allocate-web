@@ -6,6 +6,21 @@ no consent banner required. The beacon is enabled via
 
 Dashboard: **Cloudflare → Web Analytics → allocateit.app**
 
+## Excluding your own (test) visits
+
+Cloudflare Web Analytics has **no IP filter and no way to delete past data**,
+so visits already recorded can't be removed — they age out over time.
+
+To stop counting your own visits going forward, the site supports a per-device
+opt-out (stored in `localStorage`, handled in `src/layouts/Layout.astro`):
+
+- Visit any page with **`?analytics=off`** once per browser/device, e.g.
+  `https://allocateit.app/?analytics=off` — the beacon stops loading there.
+- Visit **`?analytics=on`** to re-enable.
+
+Do this on every browser/device you test from. (Most ad blockers also block
+`static.cloudflareinsights.com` automatically.)
+
 ## What we track
 
 Anonymous, aggregate traffic only — no cookies, no personal data, no idea
