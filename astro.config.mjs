@@ -1,12 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// Allocate marketing site — deployed as a GitHub Pages *project* site
-// at https://thenomet.github.io/allocate-web/.
-// If a custom domain is added later, set `site` to it and drop `base`.
+// Allocate marketing site — deployed to GitHub Pages on the custom
+// domain https://allocateit.app (served from the domain root, so no
+// `base` path prefix). The CNAME file in public/ tells Pages the domain.
 export default defineConfig({
-  site: 'https://thenomet.github.io',
-  base: '/allocate-web',
+  site: 'https://allocateit.app',
   output: 'static',
   trailingSlash: 'ignore',
 });

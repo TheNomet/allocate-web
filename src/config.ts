@@ -5,10 +5,13 @@ export const SITE = {
   tagline: 'Pay yourself first.',
   description:
     'Allocate is a macOS personal finance app. Import a bank statement, let AI categorize every transaction, and see exactly how much you save — all on your Mac.',
-  // The app's source repo (not this website's repo).
+  // The app's source repo. NOTE: if this repo is private, "View source"
+  // and "Watch on GitHub" links below won't work for anonymous visitors.
   appRepo: 'https://github.com/TheNomet/allocate',
   // GitHub Releases page where the signed DMG will live once v1 ships.
-  releasesUrl: 'https://github.com/TheNomet/allocate/releases/latest',
+  // Points at this PUBLIC website repo so the DMG is downloadable without
+  // login — the app source repo can stay private; upload the .dmg here.
+  releasesUrl: 'https://github.com/TheNomet/allocate-web/releases/latest',
   requirements: 'macOS 14 Sonoma or later',
   released: false, // flip to true when a DMG is published to Releases
 };

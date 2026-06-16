@@ -2,13 +2,13 @@
 
 Marketing site for [Allocate](https://github.com/TheNomet/allocate), a macOS-first
 personal finance app. Built with [Astro](https://astro.build) and deployed to
-GitHub Pages at **https://thenomet.github.io/allocate-web/**.
+GitHub Pages on the custom domain **https://allocateit.app**.
 
 ## Develop
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321/allocate-web
+npm run dev      # http://localhost:4321
 ```
 
 | Command           | Action                                   |
@@ -39,6 +39,23 @@ Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds with
 
 **One-time setup:** in the repo, go to **Settings → Pages → Build and deployment
 → Source** and select **GitHub Actions**.
+
+### Custom domain (allocateit.app)
+
+`public/CNAME` tells GitHub Pages to serve the site at `allocateit.app`. To make
+it resolve, add these DNS records at your registrar:
+
+| Type | Host | Value |
+| ---- | ---- | ----- |
+| A    | @    | 185.199.108.153 |
+| A    | @    | 185.199.109.153 |
+| A    | @    | 185.199.110.153 |
+| A    | @    | 185.199.111.153 |
+| CNAME | www | thenomet.github.io |
+
+Then in **Settings → Pages → Custom domain** enter `allocateit.app` and enable
+**Enforce HTTPS** once the certificate is provisioned.
+
 
 ## To do later
 
