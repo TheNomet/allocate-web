@@ -24,7 +24,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}/brand/favicon-32.png`} type="image/png" sizes="32x32" />
+    <link rel="icon" href={`${base}/brand/icon-192.png`} type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href={`${base}/brand/apple-touch-icon.png`} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -32,10 +34,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(`${base}/brand/og-image.png`, Astro.site).href} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(`${base}/brand/og-image.png`, Astro.site).href} />
 
     <!--
       Cloudflare Web Analytics (cookieless, privacy-first).

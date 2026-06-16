@@ -12,7 +12,7 @@ const links = [
 <header class="site-header">
   <div class="container site-header__inner">
     <a href={`${base}/`} class="brand" aria-label={`${SITE.name} home`}>
-      <span class="brand__mark" aria-hidden="true">A</span>
+      <img class="brand__mark" src={`${base}/brand/logo-symbol.png`} width="30" height="30" alt="" />
       <span class="brand__name">{SITE.name}</span>
     </a>
     <nav class="nav" aria-label="Primary">
@@ -49,15 +49,9 @@ const links = [
     text-decoration: none;
   }
   .brand__mark {
-    display: grid;
-    place-items: center;
+    display: block;
     width: 30px;
     height: 30px;
-    border-radius: 8px;
-    background: var(--accent);
-    color: var(--on-accent);
-    font-weight: 800;
-    font-size: 1rem;
   }
   .nav {
     display: flex;

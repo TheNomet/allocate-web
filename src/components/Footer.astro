@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div class="site-footer__brand">
-      <span class="brand__mark" aria-hidden="true">A</span>
+      <img class="brand__mark" src={`${base}/brand/logo-symbol.png`} width="36" height="36" alt="" />
       <div>
         <strong>{SITE.name}</strong>
         <p class="text-muted">{SITE.tagline}</p>
@@ -49,14 +49,9 @@ const year = new Date().getFullYear();
     font-size: 0.9rem;
   }
   .brand__mark {
-    display: grid;
-    place-items: center;
+    display: block;
     width: 36px;
     height: 36px;
-    border-radius: 9px;
-    background: var(--accent);
-    color: var(--on-accent);
-    font-weight: 800;
   }
   .site-footer__links {
     display: flex;
