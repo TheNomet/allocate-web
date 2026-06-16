@@ -8,52 +8,70 @@ import { SITE } from '../config';
 
 const features = [
   {
+    icon: icons.piggy,
+    title: 'Pay yourself first',
+    body: 'Decide what you put aside before anything else — like a salary you owe your future self. Saving and investing come first; the rest is what you have to spend.',
+  },
+  {
+    icon: icons.target,
+    title: 'Goals set your budgets',
+    body: 'Pick how much you want to save and invest, and build budgets around it. Allocate can suggest budgets from your own past spending, so the numbers are realistic.',
+  },
+  {
+    icon: icons.calendar,
+    title: 'Once a month, that’s it',
+    body: 'No real-time pings, no daily guilt. Sit down once a month, see where you landed, adjust, and get on with your life. Calm by design.',
+  },
+  {
     icon: icons.sparkles,
-    title: 'AI categorizes every transaction',
-    body: 'Drop in a statement and an on-device-guided AI agent reads each line, assigns a category by purpose, and learns your rules — so a grocery refund still counts as groceries.',
+    title: 'AI does the sorting',
+    body: 'Drop in a statement and the AI categorizes every transaction for you, so your monthly check-in takes minutes instead of an evening with a spreadsheet.',
   },
   {
-    icon: icons.donut,
-    title: 'Pay-yourself-first dashboard',
-    body: 'See the one number that matters: how much of your income you actually kept. Saved and invested, as a share of what you earned, every period.',
-  },
-  {
-    icon: icons.doc,
-    title: 'PDF, CSV, or Excel',
-    body: 'Bring statements in whatever format your bank exports. Allocate handles the parsing and normalizes everything into clean, signed transactions.',
+    icon: icons.trending,
+    title: 'Built for the long run',
+    body: 'One good or bad month doesn’t define you. Watch your pay-yourself-first rate over time and adjust next month to keep a healthy average.',
   },
   {
     icon: icons.lock,
-    title: 'On your Mac, no account',
-    body: 'No sign-up, no custom backend, no servers holding your finances. Everything lives in local storage and your private iCloud.',
-  },
-  {
-    icon: icons.tag,
-    title: 'Rules that stick',
-    body: 'Map keywords to categories once. Rules apply at import and retroactively across your history — without ever overwriting a manual override.',
-  },
-  {
-    icon: icons.cloud,
-    title: 'Syncs through iCloud',
-    body: 'Your data follows you across your devices through your own iCloud account. You own it; you can export it to CSV anytime.',
+    title: 'Free, and on your Mac',
+    body: 'You shouldn’t pay money to manage your money. Allocate is free, needs no account, and keeps your data on your device and in your own iCloud.',
   },
 ];
 
-const steps = [
+const setupSteps = [
   {
     n: '1',
-    title: 'Import a statement',
-    body: 'Export a PDF, CSV, or Excel file from your bank and drop it into Allocate.',
+    title: 'Set your goal',
+    body: 'Decide how much to pay yourself each month — the amount you’ll save and invest before spending on anything else.',
   },
   {
     n: '2',
-    title: 'AI does the sorting',
-    body: 'Every transaction is read and categorized by purpose, guided by your own rules.',
+    title: 'Build your budgets',
+    body: 'Turn that goal into budgets for the rest. Start from your past spending so the targets are grounded in reality, not wishful thinking.',
+  },
+];
+
+const monthlySteps = [
+  {
+    n: '1',
+    title: 'Import your statement',
+    body: 'Export a PDF, CSV, or Excel file from your bank and drop it into Allocate. No bank connection, no extra fees.',
+  },
+  {
+    n: '2',
+    title: 'Let the AI sort it',
+    body: 'Every transaction is categorized automatically. Skim it, fix the few it wasn’t sure about, and you’re done in minutes.',
   },
   {
     n: '3',
-    title: 'See your real rate',
-    body: 'Your pay-yourself-first rate, spending, and savings appear on a clear dashboard.',
+    title: 'See where you landed',
+    body: 'Did you pay yourself first? Are you over or under budget? Allocate shows you clearly — you decide what it means.',
+  },
+  {
+    n: '4',
+    title: 'Adjust, then live',
+    body: 'Nudge next month’s plan to keep a good average over the long run. Then close the laptop and get on with your life.',
   },
 ];
 ---
@@ -123,19 +141,45 @@ const steps = [
     <div class="container">
       <div class="center">
         <p class="eyebrow">How it works</p>
-        <h2>Three steps, then you're done.</h2>
+        <h2>Set it up once. Then a few minutes a month.</h2>
+        <p class="lead">No dashboards to babysit. A little planning up front, then a calm monthly rhythm.</p>
       </div>
-      <ol class="steps">
-        {
-          steps.map((s) => (
-            <li class="step">
-              <span class="step__n" aria-hidden="true">{s.n}</span>
-              <h3>{s.title}</h3>
-              <p class="text-muted">{s.body}</p>
-            </li>
-          ))
-        }
-      </ol>
+
+      <div class="phase">
+        <div class="phase__label">
+          <span class="phase__tag">Set up once</span>
+          <p class="text-muted">Decide what “paying yourself first” looks like for you.</p>
+        </div>
+        <ol class="steps steps--2">
+          {
+            setupSteps.map((s) => (
+              <li class="step">
+                <span class="step__n" aria-hidden="true">{s.n}</span>
+                <h3>{s.title}</h3>
+                <p class="text-muted">{s.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="phase">
+        <div class="phase__label">
+          <span class="phase__tag">Then, once a month</span>
+          <p class="text-muted">The whole routine takes minutes — adjust for the long run and move on.</p>
+        </div>
+        <ol class="steps steps--4">
+          {
+            monthlySteps.map((s) => (
+              <li class="step">
+                <span class="step__n" aria-hidden="true">{s.n}</span>
+                <h3>{s.title}</h3>
+                <p class="text-muted">{s.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -223,14 +267,40 @@ const steps = [
   }
 
   /* Steps */
+  .phase {
+    margin-top: var(--space-3xl);
+  }
+  .phase__label {
+    margin-bottom: var(--space-l);
+  }
+  .phase__label p {
+    margin: var(--space-s) 0 0;
+  }
+  .phase__tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent-strong);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
   .steps {
     list-style: none;
     counter-reset: step;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
-    margin: var(--space-3xl) 0 0;
+    gap: var(--space-l);
+    margin: 0;
     padding: 0;
+  }
+  .steps--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .steps--4 {
+    grid-template-columns: repeat(4, 1fr);
   }
   .step {
     background: var(--bg-elevated);
@@ -322,12 +392,17 @@ const steps = [
     .feature-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    .steps {
+    .steps,
+    .steps--2 {
       grid-template-columns: 1fr;
+    }
+    .steps--4 {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   @media (max-width: 560px) {
-    .feature-grid {
+    .feature-grid,
+    .steps--4 {
       grid-template-columns: 1fr;
     }
   }

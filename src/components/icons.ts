@@ -17,4 +17,12 @@ export const icons = {
   upload: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 15V4m0 0L8 8m4-4l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 15v3a1 1 0 001 1h12a1 1 0 001-1v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
 
   check: `<svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+
+  piggy: `<svg viewBox="0 0 24 24" fill="none"><path d="M3.5 12.5a6.5 5.5 0 016.5-5.5h3a6.5 5.5 0 016.2 4.5l1.3.6v3l-1.6.3a6.6 6.6 0 01-2.4 2.4V21h-3v-1.5h-3V21h-3v-2.2A6.5 5.5 0 013.5 13z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 7c0-1.7 1.6-3 3.5-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7.5" cy="12.5" r="1" fill="currentColor"/><path d="M2.6 12.3c.6 0 1 .4 1 1v1c0 .5-.4 1-1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+
+  target: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>`,
+
+  calendar: `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5.5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 9.5h16M8 3.5v4M16 3.5v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 14l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+
+  trending: `<svg viewBox="0 0 24 24" fill="none"><path d="M3 16l5-5 4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 };
