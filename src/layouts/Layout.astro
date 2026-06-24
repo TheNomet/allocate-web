@@ -21,12 +21,27 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply the saved accent theme before paint (no flash).
+      (function () {
+        try {
+          var t = localStorage.getItem('allocate-theme') || 'emerald';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'emerald');
+        }
+      })();
+    </script>
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={`${base}/brand/favicon-32.png`} type="image/png" sizes="32x32" />
     <link rel="icon" href={`${base}/brand/icon-192.png`} type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href={`${base}/brand/apple-touch-icon.png`} />
+
+    <!-- Self-hosted serif display face (Fraunces) -->
+    <link rel="preload" href={`${base}/fonts/fraunces-2.woff2`} as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href={`${base}/fonts/fraunces.css`} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

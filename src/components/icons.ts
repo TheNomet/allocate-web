@@ -25,4 +25,6 @@ export const icons = {
   calendar: `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5.5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 9.5h16M8 3.5v4M16 3.5v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 14l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 
   trending: `<svg viewBox="0 0 24 24" fill="none"><path d="M3 16l5-5 4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+
+  palette: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 3.5a8.5 8.5 0 100 17c1.6 0 2-1.2 1.2-2.1-.8-.9-.5-2.1.7-2.1H16a4.5 4.5 0 004.5-4.5c0-4.6-3.8-8.3-8.5-8.3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor"/><circle cx="9.8" cy="7.2" r="1.1" fill="currentColor"/><circle cx="14.2" cy="7.2" r="1.1" fill="currentColor"/></svg>`,
 };

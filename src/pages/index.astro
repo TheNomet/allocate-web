@@ -2,40 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import Feature from '../components/Feature.astro';
-import ScreenshotPlaceholder from '../components/ScreenshotPlaceholder.astro';
+import FeatureRow from '../components/FeatureRow.astro';
 import { icons } from '../components/icons';
 import { SITE } from '../config';
 
-const features = [
-  {
-    icon: icons.piggy,
-    title: 'Pay yourself first',
-    body: 'Decide what you put aside before anything else — like a salary you owe your future self. Saving and investing come first; the rest is what you have to spend.',
-  },
-  {
-    icon: icons.target,
-    title: 'Goals set your budgets',
-    body: 'Pick how much you want to save and invest, and build budgets around it. Allocate can suggest budgets from your own past spending, so the numbers are realistic.',
-  },
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const secondary = [
   {
     icon: icons.calendar,
-    title: 'Once a month, that’s it',
-    body: 'No real-time pings, no daily guilt. Sit down once a month, see where you landed, adjust, and get on with your life. Calm by design.',
-  },
-  {
-    icon: icons.sparkles,
-    title: 'AI does the sorting',
-    body: 'Drop in a statement and the AI categorizes every transaction for you, so your monthly check-in takes minutes instead of an evening with a spreadsheet.',
-  },
-  {
-    icon: icons.trending,
-    title: 'Built for the long run',
-    body: 'One good or bad month doesn’t define you. Watch your pay-yourself-first rate over time and adjust next month to keep a healthy average.',
+    title: 'Calm',
+    body: 'Check in once a month — no real-time pings, no daily guilt. See where you landed, adjust, and get on with your life.',
   },
   {
     icon: icons.lock,
-    title: 'Free, and on your Mac',
-    body: 'You shouldn’t pay money to manage your money. Allocate is free, needs no account, and keeps your data on your device and in your own iCloud.',
+    title: 'Private',
+    body: 'No account, no backend. Everything stays on your Mac and your own iCloud. There’s nothing for anyone to sell or leak.',
+  },
+  {
+    icon: icons.tag,
+    title: 'Free',
+    body: 'No subscription, no paid bank connectors. You shouldn’t have to pay money just to manage your money.',
   },
 ];
 
@@ -82,62 +69,100 @@ const monthlySteps = [
     <div class="container hero__inner">
       <div class="hero__copy">
         <p class="eyebrow">macOS personal finance</p>
-        <h1>Pay yourself first.</h1>
+        <h1>Pay yourself<br />first.</h1>
         <p class="lead">
-          Allocate turns a messy bank statement into a clear picture of what you
-          earned, what you spent, and how much you actually kept — automatically,
-          and entirely on your Mac.
+          Allocate turns a bank statement into a clear picture of what you earned,
+          what you kept, and whether you’re on track — automatically, and entirely
+          on your Mac.
         </p>
         <div class="hero__cta">
           <Button href="/download">Get Allocate</Button>
           <Button href="/#how" variant="secondary">See how it works</Button>
         </div>
         <p class="hero__note text-muted">
-          {SITE.requirements} · No account required · Your data stays private
+          {SITE.requirements} · No account · Free
         </p>
       </div>
-      <div class="hero__shot">
-        <ScreenshotPlaceholder title="Allocate — Dashboard" label="Dashboard screenshot coming soon" />
+      <div class="hero__media">
+        <div class="window">
+          <div class="window__bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <picture>
+            <source srcset={`${base}/screenshots/hero-dark.png`} media="(prefers-color-scheme: dark)" />
+            <img src={`${base}/screenshots/hero-light.png`} alt="Allocate dashboard showing a 30% pay-yourself-first rate and spending overview" width="1100" height="538" />
+          </picture>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Problem -->
-  <section class="section section--subtle">
-    <div class="container problem">
-      <div>
-        <p class="eyebrow">The problem</p>
-        <h2>Your budget shouldn't live in a 30-column spreadsheet.</h2>
-        <p class="text-muted">
-          Tracking money by hand means copying rows, fixing categories, and
-          wrestling formulas every month. It's fragile, it's tedious, and it
-          breaks the moment you skip a week.
-        </p>
-        <p class="text-muted">
-          Allocate keeps the clarity of a well-built spreadsheet and throws away
-          the manual work. Import, and the math is already done.
-        </p>
-      </div>
-      <ScreenshotPlaceholder title="before.xlsx" label="The old way — a fragile spreadsheet" ratio="1100 / 720" />
-    </div>
-  </section>
-
-  <!-- Features -->
+  <!-- Feature rows -->
   <section id="features" class="section">
+    <div class="container feature-rows">
+      <FeatureRow
+        eyebrow="The headline number"
+        title="Pay yourself first"
+        image="pyf"
+        alt="Pay Yourself First card showing a 30% rate, saved and invested amounts"
+      >
+        Decide what you set aside before anything else — like a salary you owe your
+        future self. Allocate shows the one number that matters: how much of your
+        income you actually kept, saved and invested.
+      </FeatureRow>
+
+      <FeatureRow
+        eyebrow="Goals → budgets"
+        title="Budgets grounded in reality"
+        image="budget"
+        alt="Budget Progress card with fixed, variable, savings and investment rows"
+        flip
+      >
+        Pick how much to save and invest, then let the rest become budgets.
+        Allocate suggests them from your own past spending, so your targets are
+        realistic — and you can see, at a glance, where you’re over or under.
+      </FeatureRow>
+
+      <FeatureRow
+        eyebrow="See it clearly"
+        title="Where your money actually goes"
+        image="spending"
+        alt="Spending Overview donut chart broken down by category"
+      >
+        A clean breakdown of spending by category — no spreadsheet wrangling. The
+        AI categorizes every transaction by purpose, so refunds and transfers land
+        in the right place and the totals tell the truth.
+      </FeatureRow>
+
+      <FeatureRow
+        eyebrow="The long run"
+        title="One month doesn’t define you"
+        image="trend"
+        alt="Income versus spending chart across recent months"
+        flip
+      >
+        Income against spending, month over month. A great month or a rough one is
+        just one data point — watch the trend and adjust next month to keep a
+        healthy average over time.
+      </FeatureRow>
+    </div>
+  </section>
+
+  <!-- Secondary points -->
+  <section class="section section--subtle">
     <div class="container">
       <div class="center">
-        <p class="eyebrow">Features</p>
-        <h2>Everything you need to budget honestly.</h2>
-        <p class="lead">A focused set of tools built around one habit: paying yourself first.</p>
+        <p class="eyebrow">Why it’s different</p>
+        <h2>Calm, private, and free.</h2>
       </div>
       <div class="feature-grid">
-        {features.map((f) => <Feature icon={f.icon} title={f.title}>{f.body}</Feature>)}
+        {secondary.map((f) => <Feature icon={f.icon} title={f.title}>{f.body}</Feature>)}
       </div>
     </div>
   </section>
 
   <!-- How it works -->
-  <section id="how" class="section section--subtle">
+  <section id="how" class="section">
     <div class="container">
       <div class="center">
         <p class="eyebrow">How it works</p>
@@ -184,7 +209,7 @@ const monthlySteps = [
   </section>
 
   <!-- Privacy -->
-  <section id="privacy" class="section">
+  <section id="privacy" class="section section--subtle">
     <div class="container privacy">
       <div>
         <p class="eyebrow">Privacy by design</p>
@@ -199,7 +224,7 @@ const monthlySteps = [
           <li>Data stored on-device and in your private iCloud</li>
           <li>Export everything to CSV whenever you want</li>
         </ul>
-        <p><a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/privacy`}>Read the full privacy policy →</a></p>
+        <p><a href={`${base}/privacy`}>Read the full privacy policy →</a></p>
       </div>
       <div class="privacy__badge" aria-hidden="true">
         <span set:html={icons.lock} />
@@ -225,45 +250,137 @@ const monthlySteps = [
   /* Hero */
   .hero {
     padding-block: var(--space-5xl) var(--space-4xl);
+    overflow: hidden;
     background:
       radial-gradient(
-        120% 90% at 80% -10%,
-        color-mix(in srgb, var(--accent) 18%, transparent),
-        transparent 60%
+        120% 90% at 85% -10%,
+        color-mix(in srgb, var(--accent) 16%, transparent),
+        transparent 55%
       );
   }
   .hero__inner {
     display: grid;
-    grid-template-columns: 1fr 1.05fr;
+    grid-template-columns: 0.85fr 1.15fr;
     gap: var(--space-3xl);
     align-items: center;
+  }
+  .hero__copy h1 {
+    margin-bottom: var(--space-l);
   }
   .hero__cta {
     display: flex;
     gap: var(--space-m);
     flex-wrap: wrap;
-    margin-top: var(--space-l);
+    margin-top: var(--space-xl);
   }
   .hero__note {
     margin-top: var(--space-l);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+  }
+  /* Hero screenshot bleeds toward the right edge */
+  .hero__media {
+    margin-right: calc(-1 * var(--space-3xl));
   }
 
-  /* Problem */
-  .problem,
+  /* macOS window frame */
+  .window {
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-window);
+  }
+  .window__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    height: 36px;
+    padding: 0 var(--space-l);
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border);
+  }
+  .window__bar .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .window__bar .dot:nth-child(1) {
+    background: #ff5f57;
+  }
+  .window__bar .dot:nth-child(2) {
+    background: #febc2e;
+  }
+  .window__bar .dot:nth-child(3) {
+    background: #28c840;
+  }
+  .window img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Feature rows */
+  .feature-rows {
+    display: grid;
+    gap: var(--space-5xl);
+  }
+
+  /* Secondary feature grid */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-l);
+    margin-top: var(--space-3xl);
+  }
+
+  /* Privacy */
   .privacy {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
     align-items: center;
   }
-
-  /* Feature grid */
-  .feature-grid {
+  .privacy__list {
+    margin: var(--space-l) 0;
+    padding: 0;
+    list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-l);
-    margin-top: var(--space-3xl);
+    gap: var(--space-s);
+  }
+  .privacy__list li {
+    position: relative;
+    padding-left: 1.8rem;
+    color: var(--text-muted);
+  }
+  .privacy__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 12px;
+    height: 7px;
+    border-left: 2.4px solid var(--success);
+    border-bottom: 2.4px solid var(--success);
+    transform: rotate(-45deg);
+  }
+  .privacy__badge {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-s);
+    text-align: center;
+    padding: var(--space-3xl);
+    border-radius: var(--radius-lg);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+  }
+  .privacy__badge :global(svg) {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-strong);
+  }
+  .privacy__badge strong {
+    font-size: 1.2rem;
   }
 
   /* Steps */
@@ -289,7 +406,6 @@ const monthlySteps = [
   }
   .steps {
     list-style: none;
-    counter-reset: step;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-l);
@@ -327,49 +443,6 @@ const monthlySteps = [
     margin: 0;
   }
 
-  /* Privacy */
-  .privacy__list {
-    margin: var(--space-l) 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: var(--space-s);
-  }
-  .privacy__list li {
-    position: relative;
-    padding-left: 1.8rem;
-    color: var(--text-muted);
-  }
-  .privacy__list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.5rem;
-    width: 12px;
-    height: 7px;
-    border-left: 2.4px solid var(--success);
-    border-bottom: 2.4px solid var(--success);
-    transform: rotate(-45deg);
-  }
-  .privacy__badge {
-    display: grid;
-    justify-items: center;
-    gap: var(--space-s);
-    text-align: center;
-    padding: var(--space-3xl);
-    border-radius: var(--radius-lg);
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-  }
-  .privacy__badge :global(svg) {
-    width: 48px;
-    height: 48px;
-    color: var(--accent-strong);
-  }
-  .privacy__badge strong {
-    font-size: 1.2rem;
-  }
-
   /* CTA */
   .cta {
     background: var(--bg-subtle);
@@ -382,15 +455,18 @@ const monthlySteps = [
 
   @media (max-width: 880px) {
     .hero__inner,
-    .problem,
     .privacy {
       grid-template-columns: 1fr;
     }
-    .hero__shot {
+    .hero__media {
       order: -1;
+      margin-right: 0;
     }
     .feature-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
+    }
+    .feature-rows {
+      gap: var(--space-4xl);
     }
     .steps,
     .steps--2 {
