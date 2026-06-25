@@ -25,10 +25,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       // Apply the saved accent theme before paint (no flash).
       (function () {
         try {
-          var t = localStorage.getItem('allocate-theme') || 'emerald';
+          var t = localStorage.getItem('allocate-theme') || 'rosepine-dawn';
           document.documentElement.setAttribute('data-theme', t);
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'emerald');
+          document.documentElement.setAttribute('data-theme', 'rosepine-dawn');
         }
       })();
     </script>

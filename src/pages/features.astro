@@ -1,0 +1,256 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { icons } from '../components/icons';
+
+const groups = [
+  {
+    icon: icons.donut,
+    title: 'Dashboard',
+    items: [
+      'Pay-Yourself-First card — the share of income you saved and invested',
+      'Spending Overview donut by category, with drill-down',
+      'Budget Progress bars (or radial wheels) for fixed, variable, savings, investments',
+      'Income vs. Spending and Spending Trend charts',
+      'Recent transactions, plus a year on-track banner',
+      'Switch between Month, Quarter, and Year — and scope to any account',
+    ],
+  },
+  {
+    icon: icons.trending,
+    title: 'Net Worth',
+    items: [
+      'Every account summed into one figure',
+      'History trend chart over time',
+      'Per-account distribution breakdown',
+      'Credit cards counted automatically as liabilities',
+      'Based on real contributions, not market guesswork',
+    ],
+  },
+  {
+    icon: icons.calendar,
+    title: 'Budgeting',
+    items: [
+      'A full-year budget matrix — categories by month',
+      'Targets suggested from your own past spending',
+      'Recalculate budgets from actuals over any period',
+      'Year KPIs: income, fixed, variable, saved, invested, surplus',
+      'Annual plans with a new-year rollover prompt',
+      'Click any cell to see the transactions behind it',
+    ],
+  },
+  {
+    icon: icons.target,
+    title: 'Goals',
+    items: [
+      'A card per goal: now, target, and what’s left',
+      'Monthly amount needed to get there on time',
+      'Apply a goal straight into your budget',
+      'Flags when your plan under-funds a goal',
+    ],
+  },
+  {
+    icon: icons.sparkles,
+    title: 'Import & AI',
+    items: [
+      'Import PDF, CSV, and Excel statements — several at once',
+      'AI categorizes every transaction by purpose',
+      'Runs on your Mac, or via your own ChatGPT account',
+      'Review screen with confidence flags and inline fixes',
+      'Silent duplicate detection when you re-import',
+      'Imports keep running in the background',
+    ],
+  },
+  {
+    icon: icons.doc,
+    title: 'Transactions',
+    items: [
+      'One grouped, searchable list across all accounts',
+      'Filter by category, date, amount, account, and more',
+      'Bulk re-categorize, add notes, override categories',
+      'Full detail sheet with foreign-currency amounts',
+      'Keyboard shortcuts for everything',
+    ],
+  },
+  {
+    icon: icons.tag,
+    title: 'Categories & Rules',
+    items: [
+      'Custom categories with colors and SF Symbol icons',
+      'Six sensible groups seeded out of the box',
+      'Keyword rules — match text to a category instantly',
+      'Natural-language rules the AI interprets for you',
+      'Re-run a rule on transactions you haven’t decided yet',
+    ],
+  },
+  {
+    icon: icons.piggy,
+    title: 'Multiple accounts',
+    items: [
+      'Checking, savings, investment, and credit-card accounts',
+      'Auto-suggests the right account when you import',
+      'Transfers between your accounts pair up automatically',
+      'A move to savings never double-counts as spending',
+      'Choose whether card spending lands in the bill or transaction month',
+    ],
+  },
+  {
+    icon: icons.check,
+    title: 'Onboarding',
+    items: [
+      'Guided first run: currency, first import, budget setup',
+      'Build budgets from your data or from presets',
+      'Resumable, and synced across your Macs',
+    ],
+  },
+  {
+    icon: icons.palette,
+    title: 'Appearance',
+    items: [
+      'Rosé Pine Dawn plus Rosé Pine, Nord, Catppuccin, Tokyo Night, Gruvbox',
+      'Accent colors and light/dark modes',
+      'Adjustable font size',
+      'Optional inline info buttons that explain every metric',
+    ],
+  },
+  {
+    icon: icons.lock,
+    title: 'Privacy & sync',
+    items: [
+      'No account, no login, no custom backend',
+      'Data stored on-device with SwiftData',
+      'Synced through your own iCloud across Macs',
+      'Raw statement files are never stored — only the transactions',
+    ],
+  },
+  {
+    icon: icons.upload,
+    title: 'Export',
+    items: [
+      'Export the transaction list (filters respected) to CSV',
+      'Export all your data from Settings',
+      'Excel-friendly, UTF-8 output',
+    ],
+  },
+];
+---
+
+<Layout title="Features" description="Everything Allocate does: dashboard, net worth, budgeting, goals, AI import, transactions, multi-account, themes, and privacy.">
+  <section class="section">
+    <div class="container">
+      <div class="center features-head">
+        <p class="eyebrow">Features</p>
+        <h1>Everything in Allocate</h1>
+        <p class="lead">
+          A complete, private picture of your money — from a single bank
+          statement to budgets, goals, and net worth. All on your Mac.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        {
+          groups.map((g) => (
+            <article class="fcard">
+              <div class="fcard__head">
+                <span class="fcard__icon" aria-hidden="true" set:html={g.icon} />
+                <h2>{g.title}</h2>
+              </div>
+              <ul class="fcard__list">
+                {g.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="center features-cta">
+        <Button href="/download">Get Allocate</Button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .features-head {
+    margin-bottom: var(--space-3xl);
+  }
+  .features-head .lead {
+    margin-inline: auto;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-l);
+  }
+  .fcard {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-card);
+  }
+  .fcard__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    margin-bottom: var(--space-l);
+  }
+  .fcard__head h2 {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  .fcard__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent-strong);
+  }
+  .fcard__icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+  .fcard__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-s);
+  }
+  .fcard__list li {
+    position: relative;
+    padding-left: 1.6rem;
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.45;
+  }
+  .fcard__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 10px;
+    height: 6px;
+    border-left: 2.2px solid var(--accent-strong);
+    border-bottom: 2.2px solid var(--accent-strong);
+    transform: rotate(-45deg);
+  }
+  .features-cta {
+    margin-top: var(--space-3xl);
+  }
+
+  @media (max-width: 900px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</content>
