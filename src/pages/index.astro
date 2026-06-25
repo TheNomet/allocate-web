@@ -118,8 +118,8 @@ const monthlySteps = [
               poster={`${base}/screenshots/${defaultTheme}/home.png`}
               aria-label="Screen recording touring Allocate's dashboard, budget, goals, and net worth"
             >
-              <source data-demo-src="webm" src={`${base}/demo-${defaultTheme}.webm`} type="video/webm" />
               <source data-demo-src="mp4" src={`${base}/demo-${defaultTheme}.mp4`} type="video/mp4" />
+              <source data-demo-src="webm" src={`${base}/demo-${defaultTheme}.webm`} type="video/webm" />
             </video>
           </div>
         </figure>
@@ -455,6 +455,35 @@ const monthlySteps = [
       // Initial sync (in case a non-default theme was restored from storage).
       var t = currentTheme();
       if (t !== defaultTheme) applyMedia(t);
+    })();
+  </script>
+
+  <script is:inline>
+    // Hero demo video: make mobile autoplay reliable and give a tap-to-play
+    // fallback when the browser (iOS Low Power Mode, data saver) blocks autoplay.
+    (function () {
+      var v = document.querySelector('video[data-demo]');
+      if (!v) return;
+      // iOS honours the muted *property* for inline autoplay, not just the attr.
+      v.muted = true;
+      v.setAttribute('muted', '');
+      v.playsInline = true;
+      function tryPlay() {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+      if (v.readyState >= 2) tryPlay();
+      v.addEventListener('loadeddata', tryPlay, { once: true });
+      v.addEventListener('canplay', tryPlay, { once: true });
+      // Tap the video itself to start it if autoplay never kicked in.
+      function onTap() { if (v.paused) tryPlay(); }
+      v.addEventListener('click', onTap);
+      v.addEventListener('touchstart', onTap, { passive: true });
+      // First interaction anywhere also unblocks playback on locked-down mobiles.
+      document.addEventListener('touchstart', function once() {
+        if (v.paused) tryPlay();
+        document.removeEventListener('touchstart', once);
+      }, { passive: true });
     })();
   </script>
 
