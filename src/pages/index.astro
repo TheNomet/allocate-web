@@ -91,6 +91,16 @@ const monthlySteps = [
           <Button href="/download">Get Allocate</Button>
           <Button href="/#how" variant="secondary">See how it works</Button>
         </div>
+        <figure class="paybar" aria-label="Of a 61 000 kroner month, 26 percent is paid to yourself first and 74 percent is everything else">
+          <figcaption class="paybar__cap text-muted">Where last month’s <b class="tnum">kr 61 000</b> went</figcaption>
+          <div class="paybar__track">
+            <span class="paybar__you"></span>
+          </div>
+          <div class="paybar__keys">
+            <span class="paybar__key paybar__key--you">You first · <b class="tnum">26%</b> · kr 16 000</span>
+            <span class="paybar__key paybar__key--rest">Everything else · <span class="tnum">74%</span></span>
+          </div>
+        </figure>
         <p class="hero__note text-muted">
           {SITE.requirements} · No account · Free
         </p>
@@ -140,7 +150,7 @@ const monthlySteps = [
   <!-- Feature rows -->
   <section id="features" class="section">
     <div class="container feature-rows">
-      <div class="frow">
+      <div class="frow" data-reveal>
         <div class="frow__copy">
           <p class="eyebrow">The headline number</p>
           <h3 class="frow__title">Pay yourself first</h3>
@@ -237,7 +247,7 @@ const monthlySteps = [
         bank connection, and your statements aren’t sent to our servers.
       </FeatureRow>
 
-      <div class="frow frow--flip">
+      <div class="frow frow--flip" data-reveal>
         <div class="frow__copy">
           <p class="eyebrow">Every krone accounted for</p>
           <h3 class="frow__title">All your accounts, one clean list</h3>
@@ -450,6 +460,28 @@ const monthlySteps = [
       if (t !== defaultTheme) applyMedia(t);
     })();
   </script>
+
+  <script is:inline>
+    // Gentle scroll-reveal for feature rows. Reveal-all fallback if the browser
+    // lacks IntersectionObserver or the visitor prefers reduced motion.
+    (function () {
+      var nodes = document.querySelectorAll('[data-reveal]');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        nodes.forEach(function (n) { n.classList.add('is-in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+      nodes.forEach(function (n) { io.observe(n); });
+    })();
+  </script>
 </Layout>
 
 <style>
@@ -486,6 +518,80 @@ const monthlySteps = [
   /* Hero screenshot bleeds toward the right edge */
   .hero__media {
     margin-right: calc(-1 * var(--space-4xl));
+  }
+
+  /* Signature: the "pay yourself first" allocation bar. */
+  .paybar {
+    margin: var(--space-2xl) 0 0;
+    max-width: 30rem;
+  }
+  .paybar__cap {
+    font-size: 0.9rem;
+    margin: 0 0 var(--space-s);
+  }
+  .paybar__cap b {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .paybar__track {
+    position: relative;
+    height: 14px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .paybar__you {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 26%;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    transform-origin: left center;
+  }
+  .paybar__keys {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-m);
+    margin-top: var(--space-s);
+    font-size: 0.86rem;
+  }
+  .paybar__key--you {
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+  .paybar__key--you b { font-weight: 800; }
+  .paybar__key--rest { color: var(--text-faint); }
+
+  /* Hero load: one quiet, orchestrated entrance. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__copy > * {
+      animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .hero__copy > :nth-child(1) { animation-delay: 0.02s; }
+    .hero__copy > :nth-child(2) { animation-delay: 0.10s; }
+    .hero__copy > :nth-child(3) { animation-delay: 0.18s; }
+    .hero__copy > :nth-child(4) { animation-delay: 0.26s; }
+    .hero__copy > :nth-child(5) { animation-delay: 0.34s; }
+    .hero__copy > :nth-child(6) { animation-delay: 0.42s; }
+    .hero__media {
+      animation: hero-fade 0.9s ease 0.2s both;
+    }
+    .paybar__you {
+      width: 0;
+      animation: paybar-fill 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    }
+    @keyframes hero-rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes hero-fade {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes paybar-fill {
+      to { width: 26%; }
+    }
   }
 
   /* Clean rounded screenshot / video panel (shared shape with FeatureRow) */
@@ -534,6 +640,8 @@ const monthlySteps = [
     gap: var(--space-l);
     padding: var(--space-2xl);
     background: var(--bg-elevated);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
   }
   .pyf__head {
     display: flex;

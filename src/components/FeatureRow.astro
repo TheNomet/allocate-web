@@ -25,7 +25,7 @@ const DEFAULT_THEME = 'rosepine-dawn';
 const resolved = `${base}/screenshots/${DEFAULT_THEME}/${name}.png`;
 ---
 
-<div class:list={['frow', { 'frow--flip': flip }]}>
+<div class:list={['frow', { 'frow--flip': flip }]} data-reveal>
   <div class="frow__copy">
     {eyebrow && <p class="eyebrow">{eyebrow}</p>}
     <h3 class="frow__title">{title}</h3>
