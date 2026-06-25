@@ -13,3 +13,6 @@ npm-debug.log*
 # env
 .env
 .env.production
+
+# raw screenshot inputs (processed copies live in public/screenshots/)
+/*.png

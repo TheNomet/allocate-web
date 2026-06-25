@@ -57,13 +57,46 @@ Then in **Settings → Pages → Custom domain** enter `allocateit.app` and enab
 **Enforce HTTPS** once the certificate is provisioned.
 
 
+## Marketing media (screenshots + demo video)
+
+The landing page is **video-first**: the hero plays an autoplaying screen
+recording, and each feature row shows a real screenshot in a clean rounded
+panel (no faux title bar). All media is captured for **all six themes**, and the
+theme cards in the "Make it yours" section swap both the hero video and every
+screenshot live (and re-theme the site).
+
+Assets live under `public/`:
+
+```
+public/
+  demo-<theme>.mp4 / .webm           hero demo video, one pair per theme
+  screenshots/<theme>/
+    home.png  pay-yourself-first.png  budget.png  goals.png
+    net-worth.png  transactions.png  import.png    (home.png doubles as the video poster)
+```
+
+where `<theme>` ∈ `rosepine-dawn rosepine nord catppuccin tokyonight gruvbox`
+(`rosepine-dawn` is the default shown on load).
+
+These are produced deterministically by the **`marketing-capture` skill** in the
+app repo (`allocate/main/.claude/skills/marketing-capture/`), which drives the
+real app via Quartz/cliclick + `screencapture` and writes straight into this
+repo's `public/`. To regenerate one theme:
+
+```sh
+cd allocate/main/.claude/skills/marketing-capture
+python3 capture.py rosepine-dawn          # or any theme raw value
+```
+
+See that skill's `SKILL.md` for prerequisites (cliclick, ffmpeg, pyobjc-Quartz,
+screen-recording permission) and the full pipeline.
+
+
 ## To do later
 
-- **Screenshots.** Real imagery is stubbed with `ScreenshotPlaceholder`. Export
-  PNGs from `designs/allocalte.pen` into `public/screenshots/`, then pass
-  `src="/screenshots/your-file.png"` to the `<ScreenshotPlaceholder>` instances.
 - **Analytics.** Paste your Cloudflare Web Analytics token into
   `CLOUDFLARE_ANALYTICS_TOKEN` in `src/config.ts` to enable cookieless tracking.
+  (A token is already set.)
 - **Release.** When the signed `.dmg` is published to GitHub Releases, set
   `released: true` in `src/config.ts` to flip the download page to live.
 ```

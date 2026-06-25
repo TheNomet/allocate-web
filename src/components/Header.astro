@@ -1,30 +1,12 @@
 ---
 import { SITE } from '../config';
-import { icons } from './icons';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const links = [
-  { href: '/#features', label: 'Features' },
+  { href: '/features', label: 'Features' },
   { href: '/#how', label: 'How it works' },
-  { href: '/#privacy', label: 'Privacy' },
-];
-
-const accentThemes = [
-  { id: 'emerald', name: 'Emerald', color: '#0e9f6e' },
-  { id: 'teal', name: 'Teal', color: '#0d9488' },
-  { id: 'indigo', name: 'Indigo', color: '#4f46e5' },
-  { id: 'amber', name: 'Amber', color: '#ed8c40' },
-  { id: 'violet', name: 'Violet', color: '#7c3aed' },
-  { id: 'rose', name: 'Rose', color: '#e11d6f' },
-];
-
-const ghosttyThemes = [
-  { id: 'rosepine', name: 'Rosé Pine', color: '#c4a7e7' },
-  { id: 'rosepine-dawn', name: 'Rosé Pine Dawn', color: '#907aa9' },
-  { id: 'catppuccin', name: 'Catppuccin', color: '#cba6f7' },
-  { id: 'nord', name: 'Nord', color: '#88c0d0' },
-  { id: 'tokyonight', name: 'Tokyo Night', color: '#7aa2f7' },
-  { id: 'gruvbox', name: 'Gruvbox', color: '#fabd2f' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/privacy', label: 'Privacy' },
 ];
 ---
 
@@ -36,33 +18,6 @@ const ghosttyThemes = [
     </a>
     <nav class="nav" aria-label="Primary">
       {links.map((l) => <a href={`${base}${l.href}`}>{l.label}</a>)}
-
-      <details class="themepicker">
-        <summary class="themepicker__btn" aria-label="Choose a theme" title="Theme">
-          <span set:html={icons.palette} />
-        </summary>
-        <div class="themepicker__menu" role="menu">
-          <p class="themepicker__hd">Accent</p>
-          {
-            accentThemes.map((t) => (
-              <button type="button" data-set-theme={t.id} role="menuitemradio">
-                <span class="themepicker__dot" style={`background:${t.color}`} />
-                {t.name}
-              </button>
-            ))
-          }
-          <p class="themepicker__hd">Ghostty</p>
-          {
-            ghosttyThemes.map((t) => (
-              <button type="button" data-set-theme={t.id} role="menuitemradio">
-                <span class="themepicker__dot" style={`background:${t.color}`} />
-                {t.name}
-              </button>
-            ))
-          }
-        </div>
-      </details>
-
       <a class="nav__cta" href={`${base}/download`}>Get Allocate</a>
     </nav>
   </div>
@@ -70,14 +25,8 @@ const ghosttyThemes = [
 
 <script is:inline>
   (function () {
-    function current() {
-      return document.documentElement.getAttribute('data-theme') || 'emerald';
-    }
-    function mark() {
-      document.querySelectorAll('[data-set-theme]').forEach(function (b) {
-        b.classList.toggle('is-active', b.getAttribute('data-set-theme') === current());
-      });
-    }
+    // Apply a theme when any [data-set-theme] control is clicked (the theme
+    // cards on the home page). Layout.astro restores the saved theme on load.
     document.querySelectorAll('[data-set-theme]').forEach(function (b) {
       b.addEventListener('click', function () {
         var t = b.getAttribute('data-set-theme');
@@ -85,18 +34,15 @@ const ghosttyThemes = [
         try {
           localStorage.setItem('allocate-theme', t);
         } catch (e) {}
-        mark();
-        var d = b.closest('details');
-        if (d) d.removeAttribute('open');
+        document.querySelectorAll('[data-set-theme]').forEach(function (x) {
+          x.classList.toggle('is-active', x.getAttribute('data-set-theme') === t);
+        });
       });
     });
-    // Close the menu when clicking outside.
-    document.addEventListener('click', function (e) {
-      document.querySelectorAll('details.themepicker[open]').forEach(function (d) {
-        if (!d.contains(e.target)) d.removeAttribute('open');
-      });
+    var cur = document.documentElement.getAttribute('data-theme') || 'rosepine-dawn';
+    document.querySelectorAll('[data-set-theme]').forEach(function (x) {
+      x.classList.toggle('is-active', x.getAttribute('data-set-theme') === cur);
     });
-    mark();
   })();
 </script>
 
@@ -154,96 +100,6 @@ const ghosttyThemes = [
   }
   .nav__cta:hover {
     background: var(--accent-strong);
-  }
-
-  /* Theme picker */
-  .themepicker {
-    position: relative;
-  }
-  .themepicker__btn {
-    list-style: none;
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    transition: color 0.12s ease, border-color 0.12s ease;
-  }
-  .themepicker__btn::-webkit-details-marker {
-    display: none;
-  }
-  .themepicker__btn:hover {
-    color: var(--text);
-    border-color: var(--text-faint);
-  }
-  .themepicker__btn :global(svg) {
-    width: 18px;
-    height: 18px;
-  }
-  .themepicker__menu {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-window);
-    padding: 6px;
-    display: grid;
-    gap: 2px;
-    min-width: 184px;
-    max-height: min(72vh, 480px);
-    overflow-y: auto;
-    z-index: 60;
-  }
-  .themepicker__hd {
-    margin: 4px 8px 6px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-faint);
-  }
-  .themepicker__hd:not(:first-child) {
-    margin-top: 10px;
-    padding-top: 8px;
-    border-top: 1px solid var(--border);
-  }
-  .themepicker__menu button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border: 0;
-    background: none;
-    border-radius: 8px;
-    color: var(--text);
-    font: inherit;
-    font-size: 0.92rem;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-  }
-  .themepicker__menu button:hover {
-    background: var(--bg-subtle);
-  }
-  .themepicker__menu button.is-active {
-    font-weight: 600;
-  }
-  .themepicker__menu button.is-active::after {
-    content: '✓';
-    margin-left: auto;
-    color: var(--accent-strong);
-  }
-  .themepicker__dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    flex: none;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
   }
 
   @media (max-width: 640px) {

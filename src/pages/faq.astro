@@ -1,0 +1,257 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const sections = [
+  {
+    title: 'Getting started',
+    faqs: [
+      {
+        q: 'What is Allocate?',
+        a: 'A macOS personal finance app. You import a bank statement, AI categorizes every transaction, and Allocate shows your budgets, goals, spending, and net worth — all on your Mac.',
+      },
+      {
+        q: 'What does it cost?',
+        a: 'It’s free. No subscription, and no paid bank connectors.',
+      },
+      {
+        q: 'Do I need an account or to sign up?',
+        a: 'No. There’s no login, no email, and no Allocate account. The app works the moment you open it.',
+      },
+      {
+        q: 'Which devices are supported?',
+        a: 'macOS 14 (Sonoma) or later. An iPhone version is planned for a future release.',
+      },
+      {
+        q: 'Does Allocate connect to my bank?',
+        a: 'No. Instead of a bank login, you export a statement (PDF, CSV, or Excel) and drop it in. Nothing connects to your bank, and there are no connector fees.',
+      },
+    ],
+  },
+  {
+    title: 'Importing statements',
+    faqs: [
+      {
+        q: 'Which files can I import?',
+        a: 'PDF, CSV, and Excel (.xlsx) statements — and you can import several at once, assigning each to the right account.',
+      },
+      {
+        q: 'Which accounts should I import?',
+        a: 'Import every account you actually move money through — checking, savings, investments, bill-paying, and credit cards. Your rates and net worth are only accurate when all of them are present.',
+      },
+      {
+        q: 'What if I import the same statement twice?',
+        a: 'Allocate detects duplicates automatically and skips them, showing you how many it skipped. You can re-import freely without creating double entries.',
+      },
+      {
+        q: 'Does my statement get uploaded anywhere?',
+        a: 'No. The raw file is never stored — only the extracted transactions are kept on your device. Categorization runs on your Mac (or via your own ChatGPT account if you choose).',
+      },
+    ],
+  },
+  {
+    title: 'AI & categorization',
+    faqs: [
+      {
+        q: 'How does categorization work, and can I fix it?',
+        a: 'The AI labels each transaction by its purpose. Anything it gets wrong, you can override in one click — and teach it a rule so it’s right next time.',
+      },
+      {
+        q: 'Can it run fully offline?',
+        a: 'Yes. By default extraction runs locally on your Mac. Connecting your own ChatGPT account is an optional fallback, not a requirement.',
+      },
+      {
+        q: 'What’s the difference between keyword and natural-language rules?',
+        a: 'A keyword rule matches text (e.g. “Rema 1000” → Groceries) instantly and deterministically. A natural-language rule describes intent in plain words and lets the AI apply it.',
+      },
+    ],
+  },
+  {
+    title: 'Accounts & transfers',
+    faqs: [
+      {
+        q: 'How does Allocate match transfers between my accounts?',
+        a: 'When a move shows up as a debit on one statement and a credit on another, Allocate pairs them automatically — opposite amounts, within a few days, on different accounts. If two moves could match, it asks you instead of guessing.',
+      },
+      {
+        q: 'Why doesn’t moving money to savings show up as spending?',
+        a: 'A transfer into a savings or investment account is counted once as money saved, and the matching leg is filed under Transfers so it doesn’t double-count. A credit-card bill payment counts on neither leg — the card’s individual purchases already counted.',
+      },
+      {
+        q: 'A transfer was matched wrong, or not at all. What do I do?',
+        a: 'Open “Review transfers” to confirm, change, or unpair any match by hand. Auto-matching only happens when it’s unambiguous; everything is visible and reversible.',
+      },
+      {
+        q: 'How are credit cards handled?',
+        a: 'A card’s balance counts as a liability against your net worth. You choose whether card spending lands in the month you bought (transaction month) or the month you’re billed (bill month) — globally, or per card.',
+      },
+    ],
+  },
+  {
+    title: 'Budgets & goals',
+    faqs: [
+      {
+        q: 'Where do budget suggestions come from?',
+        a: 'From your own past spending, so the targets are realistic rather than wishful. You can recalculate them from your actuals over any period whenever you like.',
+      },
+      {
+        q: 'What is the “pay yourself first” rate?',
+        a: 'The share of your income you actually kept — what you saved plus what you invested, divided by what you earned.',
+      },
+      {
+        q: 'How do goals connect to my budget?',
+        a: 'A goal works out how much to set aside each month, and you can apply that straight into the matching budget. If your plan falls short, Allocate flags it.',
+      },
+    ],
+  },
+  {
+    title: 'Net worth',
+    faqs: [
+      {
+        q: 'Why does my net worth look off, or lower than expected?',
+        a: 'Net worth is the sum of your accounts’ balances, based on money in and out — not market value. So it can look low if you haven’t imported every account, haven’t set each account’s opening balance, or are skipping a recent statement (the balance lags by exactly that gap).',
+      },
+      {
+        q: 'Does it track my investment growth or stock prices?',
+        a: 'Not in v1. Investment accounts reflect the money you’ve put in, not market gains, so net worth undershoots a rising portfolio. Live prices are planned for a later release.',
+      },
+      {
+        q: 'My net worth didn’t move even though I saved money. Why?',
+        a: 'Usually a missing opening balance or an un-imported statement on one account. Set each account’s starting balance and import its latest statement, and the figure updates.',
+      },
+    ],
+  },
+  {
+    title: 'Privacy & your data',
+    faqs: [
+      {
+        q: 'Where is my data stored?',
+        a: 'On your Mac, using Apple’s SwiftData, and synced only through your own iCloud. There’s no Allocate server holding it.',
+      },
+      {
+        q: 'Can I export or delete everything?',
+        a: 'Yes. Export your transactions (or all your data) to CSV anytime, and clear everything from the app whenever you want.',
+      },
+    ],
+  },
+];
+---
+
+<Layout title="FAQ" description="Frequently asked questions about Allocate — importing statements, transfers, net worth, budgets, privacy, and more.">
+  <section class="section">
+    <div class="container faq">
+      <div class="faq__head">
+        <p class="eyebrow">FAQ</p>
+        <h1>Questions & answers</h1>
+        <p class="lead">
+          The short version of how Allocate works. Can’t find your question?
+          It’ll be covered as the app gets closer to release.
+        </p>
+      </div>
+
+      {
+        sections.map((s) => (
+          <div class="faq__group">
+            <h2 class="faq__group-title">{s.title}</h2>
+            <div class="faq__list">
+              {s.faqs.map((f) => (
+                <details class="qa">
+                  <summary class="qa__q">
+                    <span>{f.q}</span>
+                    <span class="qa__chevron" aria-hidden="true" />
+                  </summary>
+                  <p class="qa__a">{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="faq__cta">
+        <p class="text-muted">Ready to try it?</p>
+        <Button href="/download">Get Allocate</Button>
+        <p class="text-muted faq__cta-note">
+          See the full <a href={`${base}/features`}>feature list →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .faq {
+    max-width: 820px;
+  }
+  .faq__head {
+    margin-bottom: var(--space-3xl);
+  }
+  .faq__group {
+    margin-bottom: var(--space-3xl);
+  }
+  .faq__group-title {
+    font-size: 1.4rem;
+    margin-bottom: var(--space-m);
+  }
+  .faq__list {
+    display: grid;
+    gap: var(--space-s);
+  }
+  .qa {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+  .qa__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    padding: var(--space-l) var(--space-xl);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+    list-style: none;
+  }
+  .qa__q::-webkit-details-marker {
+    display: none;
+  }
+  .qa__chevron {
+    flex: none;
+    width: 11px;
+    height: 11px;
+    border-right: 2px solid var(--text-faint);
+    border-bottom: 2px solid var(--text-faint);
+    transform: rotate(45deg);
+    transition: transform 0.18s ease;
+    margin-top: -3px;
+  }
+  .qa[open] .qa__chevron {
+    transform: rotate(-135deg);
+    margin-top: 3px;
+  }
+  .qa__a {
+    margin: 0;
+    padding: 0 var(--space-xl) var(--space-l);
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .faq__cta {
+    text-align: center;
+    margin-top: var(--space-4xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--border);
+  }
+  .faq__cta > .text-muted {
+    margin-bottom: var(--space-m);
+  }
+  .faq__cta-note {
+    margin-top: var(--space-l);
+    font-size: 0.95rem;
+  }
+</style>
+</content>

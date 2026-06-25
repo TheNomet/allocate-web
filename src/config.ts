@@ -4,7 +4,7 @@ export const SITE = {
   name: 'Allocate',
   tagline: 'Pay yourself first.',
   description:
-    'Allocate is a macOS personal finance app. Import a bank statement, let AI categorize every transaction, and see exactly how much you save — all on your Mac.',
+    'Allocate is a macOS personal finance app. Import a bank statement, let on-device AI categorize every transaction, and track your budgets, goals, and net worth — privately, with no account and nothing leaving your Mac.',
   // The app's source repo. Currently PRIVATE, so it is intentionally not
   // linked anywhere on the public site. Wire links back up if it goes public.
   appRepo: 'https://github.com/TheNomet/allocate',

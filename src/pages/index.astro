@@ -7,6 +7,7 @@ import { icons } from '../components/icons';
 import { SITE } from '../config';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const defaultTheme = 'rosepine-dawn';
 
 const secondary = [
   {
@@ -17,13 +18,24 @@ const secondary = [
   {
     icon: icons.lock,
     title: 'Private',
-    body: 'No account, no backend. Everything stays on your Mac and your own iCloud. There’s nothing for anyone to sell or leak.',
+    body: 'No account, no backend, no bank login. Everything stays on your Mac and your own iCloud — there’s nothing for anyone to sell or leak.',
   },
   {
     icon: icons.tag,
     title: 'Free',
-    body: 'No subscription, no paid bank connectors. You shouldn’t have to pay money just to manage your money.',
+    body: 'No subscription, no paid bank connectors. You shouldn’t have to pay money just to understand your money.',
   },
+];
+
+// Theme presets that mirror the app's Appearance settings. Clicking a swatch
+// re-themes this site live (handled by the data-set-theme listener in Header).
+const themes = [
+  { id: 'rosepine-dawn', name: 'Rosé Pine Dawn', bg: '#faf4ed', accent: '#907aa9', text: '#575279' },
+  { id: 'rosepine', name: 'Rosé Pine', bg: '#191724', accent: '#c4a7e7', text: '#e0def4' },
+  { id: 'nord', name: 'Nord', bg: '#2e3440', accent: '#88c0d0', text: '#eceff4' },
+  { id: 'catppuccin', name: 'Catppuccin', bg: '#1e1e2e', accent: '#cba6f7', text: '#cdd6f4' },
+  { id: 'tokyonight', name: 'Tokyo Night', bg: '#1a1b26', accent: '#7aa2f7', text: '#c0caf5' },
+  { id: 'gruvbox', name: 'Gruvbox', bg: '#282828', accent: '#fabd2f', text: '#ebdbb2' },
 ];
 
 const setupSteps = [
@@ -48,12 +60,12 @@ const monthlySteps = [
   {
     n: '2',
     title: 'Let the AI sort it',
-    body: 'Every transaction is categorized automatically. Skim it, fix the few it wasn’t sure about, and you’re done in minutes.',
+    body: 'Every transaction is categorized automatically — on your Mac. Skim it, fix the few it wasn’t sure about, and you’re done in minutes.',
   },
   {
     n: '3',
     title: 'See where you landed',
-    body: 'Did you pay yourself first? Are you over or under budget? Allocate shows you clearly — you decide what it means.',
+    body: 'Did you pay yourself first? Are you over or under budget? Is your net worth climbing? Allocate shows you clearly.',
   },
   {
     n: '4',
@@ -66,7 +78,7 @@ const monthlySteps = [
 <Layout>
   <!-- Hero -->
   <section class="hero">
-    <div class="container hero__inner">
+    <div class="container container--wide hero__inner">
       <div class="hero__copy">
         <p class="eyebrow">macOS personal finance</p>
         <h1>Pay yourself<br />first.</h1>
@@ -79,72 +91,200 @@ const monthlySteps = [
           <Button href="/download">Get Allocate</Button>
           <Button href="/#how" variant="secondary">See how it works</Button>
         </div>
+        <figure class="paybar" aria-label="Of a 61 000 kroner month, 26 percent is paid to yourself first and 74 percent is everything else">
+          <figcaption class="paybar__cap text-muted">Where last month’s <b class="tnum">kr 61 000</b> went</figcaption>
+          <div class="paybar__track">
+            <span class="paybar__you"></span>
+          </div>
+          <div class="paybar__keys">
+            <span class="paybar__key paybar__key--you">You first · <b class="tnum">26%</b> · kr 16 000</span>
+            <span class="paybar__key paybar__key--rest">Everything else · <span class="tnum">74%</span></span>
+          </div>
+        </figure>
         <p class="hero__note text-muted">
           {SITE.requirements} · No account · Free
         </p>
       </div>
       <div class="hero__media">
-        <div class="window">
-          <div class="window__bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <figure class="shot shot--hero">
+          <div class="shot__body">
+            <video
+              data-demo
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster={`${base}/screenshots/${defaultTheme}/home.png`}
+              aria-label="Screen recording touring Allocate's dashboard, budget, goals, and net worth"
+            >
+              <source data-demo-src="webm" src={`${base}/demo-${defaultTheme}.webm`} type="video/webm" />
+              <source data-demo-src="mp4" src={`${base}/demo-${defaultTheme}.mp4`} type="video/mp4" />
+            </video>
           </div>
-          <picture>
-            <source srcset={`${base}/screenshots/hero-dark.png`} media="(prefers-color-scheme: dark)" />
-            <img src={`${base}/screenshots/hero-light.png`} alt="Allocate dashboard showing a 30% pay-yourself-first rate and spending overview" width="1100" height="538" />
-          </picture>
-        </div>
+        </figure>
       </div>
+    </div>
+  </section>
+
+  <!-- Intro / what is Allocate -->
+  <section class="section--tight intro">
+    <div class="container center">
+      <p class="eyebrow">Your money, in one calm view</p>
+      <h2 class="intro__headline">
+        Accounts, budgets, goals, and net worth — together, and entirely yours.
+      </h2>
+      <p class="lead intro__lead">
+        Import a statement, let the AI sort it, and see exactly where you stand.
+        No sign-up, no subscription, and nothing leaves your Mac.
+      </p>
+      <ul class="intro__chips">
+        <li>On-device storage</li>
+        <li>iCloud sync</li>
+        <li>No account</li>
+        <li>AI runs on your Mac</li>
+      </ul>
     </div>
   </section>
 
   <!-- Feature rows -->
   <section id="features" class="section">
     <div class="container feature-rows">
+      <div class="frow" data-reveal>
+        <div class="frow__copy">
+          <p class="eyebrow">The headline number</p>
+          <h3 class="frow__title">Pay yourself first</h3>
+          <p class="frow__body text-muted">
+            Decide what you set aside before anything else — like a salary you owe
+            your future self. Allocate shows the one number that matters: how much
+            of your income you actually kept, saved, and invested.
+          </p>
+          <ul class="frow__list">
+            <li>Saved vs. invested at a glance</li>
+            <li>Month, quarter, or year</li>
+            <li>On-track banner against your annual target</li>
+          </ul>
+        </div>
+        <div class="frow__media">
+          <div class="shot-stack shot-stack--pyf">
+            <figure class="shot shot-stack__back">
+              <div class="shot__body">
+                <img
+                  src={`${base}/screenshots/${defaultTheme}/budget_progress.png`}
+                  data-shot="budget_progress"
+                  alt="Budget Progress card: fixed expenses, variable expenses, savings, and investments against their targets"
+                  loading="lazy"
+                  onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.src.replace(/screenshots\/[^/]+\//,'screenshots/rosepine-dawn/');}"
+                />
+              </div>
+            </figure>
+            <figure class="shot shot-stack__front">
+              <div class="shot__body">
+                <img
+                  src={`${base}/screenshots/${defaultTheme}/PYF_progress.png`}
+                  data-shot="PYF_progress"
+                  alt="Pay Yourself First card: the share of income kept, saved, and invested this month against the target"
+                  loading="lazy"
+                  onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.src.replace(/screenshots\/[^/]+\//,'screenshots/rosepine-dawn/');}"
+                />
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+
       <FeatureRow
-        eyebrow="The headline number"
-        title="Pay yourself first"
-        image="pyf"
-        alt="Pay Yourself First card showing a 30% rate, saved and invested amounts"
+        eyebrow="New in v1"
+        title="See your net worth grow"
+        name="net-worth"
+        alt="Net Worth page with a history trend chart and per-account breakdown"
+        flip
+        bullets={['Every account in one figure', 'History trend over time', 'Credit cards counted as liabilities']}
       >
-        Decide what you set aside before anything else — like a salary you owe your
-        future self. Allocate shows the one number that matters: how much of your
-        income you actually kept, saved and invested.
+        Watch the number that compounds. Net Worth pulls every account together —
+        checking, savings, investments, even credit cards — and charts how your
+        contributions add up over time. Real money in, not market guesswork.
       </FeatureRow>
 
       <FeatureRow
         eyebrow="Goals → budgets"
         title="Budgets grounded in reality"
-        image="budget"
-        alt="Budget Progress card with fixed, variable, savings and investment rows"
-        flip
+        name="budget"
+        alt="Budget matrix with categories across months"
+        bullets={['Suggested from your own history', 'A year-at-a-glance matrix', 'Recalculate from actuals anytime']}
       >
         Pick how much to save and invest, then let the rest become budgets.
-        Allocate suggests them from your own past spending, so your targets are
-        realistic — and you can see, at a glance, where you’re over or under.
+        Allocate suggests targets from your past spending and lays the whole year
+        out in one matrix — so you can see, month by month, where you’re over or
+        under.
       </FeatureRow>
 
       <FeatureRow
-        eyebrow="See it clearly"
-        title="Where your money actually goes"
-        image="spending"
-        alt="Spending Overview donut chart broken down by category"
-      >
-        A clean breakdown of spending by category — no spreadsheet wrangling. The
-        AI categorizes every transaction by purpose, so refunds and transfers land
-        in the right place and the totals tell the truth.
-      </FeatureRow>
-
-      <FeatureRow
-        eyebrow="The long run"
-        title="One month doesn’t define you"
-        image="trend"
-        alt="Income versus spending chart across recent months"
+        eyebrow="Stay on track"
+        title="Set goals, then crush them"
+        name="goals"
+        alt="Goals page showing progress toward savings targets"
         flip
+        bullets={['Now vs. goal vs. monthly needed', 'Apply a goal to your budget in one step', 'Flags when your plan falls short']}
       >
-        Income against spending, month over month. A great month or a rough one is
-        just one data point — watch the trend and adjust next month to keep a
-        healthy average over time.
+        Save for a home deposit, a trip, or a rainy-day fund. Allocate tracks how
+        far you’ve come, what’s left, and how much to set aside each month — and
+        can write that straight into your budget.
       </FeatureRow>
+
+      <FeatureRow
+        eyebrow="Private by default"
+        title="Import a statement, let AI sort it"
+        name="import"
+        alt="Import review screen with AI-categorized transactions"
+        bullets={['PDF, CSV & Excel — even several at once', 'Runs on your Mac, or falls back to your own ChatGPT', 'Review, fix, and teach it rules as you go']}
+      >
+        Export a PDF, CSV, or Excel file from your bank and drop it in. The AI
+        categorizes every transaction by purpose — and it runs on your Mac. No
+        bank connection, and your statements aren’t sent to our servers.
+      </FeatureRow>
+
+      <div class="frow frow--flip" data-reveal>
+        <div class="frow__copy">
+          <p class="eyebrow">Every krone accounted for</p>
+          <h3 class="frow__title">All your accounts, one clean list</h3>
+          <p class="frow__body text-muted">
+            Filter, sort, re-categorize in bulk, add notes, and build rules that
+            stick. Transfers between your own accounts pair up automatically, so a
+            move from checking to savings never double-counts as spending.
+          </p>
+          <ul class="frow__list">
+            <li>Multi-account, one searchable view</li>
+            <li>Keyword &amp; natural-language rules</li>
+            <li>Export anything to CSV</li>
+          </ul>
+        </div>
+        <div class="frow__media">
+          <div class="shot-stack">
+            <figure class="shot shot-stack__back">
+              <div class="shot__body">
+                <img
+                  src={`${base}/screenshots/${defaultTheme}/transactions.png`}
+                  data-shot="transactions"
+                  alt="Transactions list with categories and amounts across accounts"
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+            <figure class="shot shot-stack__front">
+              <div class="shot__body">
+                <img
+                  src={`${base}/screenshots/${defaultTheme}/transactions-match.png`}
+                  data-shot="transactions-match"
+                  alt="Auto-matched transfer pairing two accounts into one internal transfer"
+                  loading="lazy"
+                  onerror="this.closest('.shot-stack__front').style.display='none';"
+                />
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -161,8 +301,34 @@ const monthlySteps = [
     </div>
   </section>
 
+  <!-- Themes showcase -->
+  <section class="section themes">
+    <div class="container center">
+      <p class="eyebrow">Make it yours</p>
+      <h2>Themes that feel right at home.</h2>
+      <p class="lead themes__lead">
+        Allocate ships with Rosé Pine Dawn and a set of beloved editor themes —
+        Nord, Catppuccin, Tokyo Night and more. Tap one to preview it right here.
+      </p>
+      <div class="themes__grid">
+        {
+          themes.map((t) => (
+            <button type="button" class="themecard" data-set-theme={t.id} style={`--c-bg:${t.bg};--c-accent:${t.accent};--c-text:${t.text}`}>
+              <span class="themecard__swatch">
+                <span class="themecard__line themecard__line--lg" />
+                <span class="themecard__line" />
+                <span class="themecard__pill" />
+              </span>
+              <span class="themecard__name">{t.name}</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- How it works -->
-  <section id="how" class="section">
+  <section id="how" class="section section--subtle">
     <div class="container">
       <div class="center">
         <p class="eyebrow">How it works</p>
@@ -209,19 +375,22 @@ const monthlySteps = [
   </section>
 
   <!-- Privacy -->
-  <section id="privacy" class="section section--subtle">
+  <section id="privacy" class="section">
     <div class="container privacy">
       <div>
         <p class="eyebrow">Privacy by design</p>
         <h2>Your finances never leave your control.</h2>
         <p class="text-muted">
-          Allocate has no custom backend and requires no account. Transactions
-          are stored on your device with SwiftData and synced only through your
-          own iCloud. There's nothing for us to see, sell, or lose.
+          Allocate has no custom backend and requires no account. Transactions are
+          stored on your device with SwiftData and synced only through your own
+          iCloud. Even the AI categorization runs on your Mac — or, if you prefer,
+          through your own ChatGPT account. There’s nothing for us to see, sell, or
+          lose.
         </p>
         <ul class="privacy__list">
           <li>No sign-up, no email required to use the app</li>
           <li>Data stored on-device and in your private iCloud</li>
+          <li>AI runs locally, or via your own ChatGPT — never our servers</li>
           <li>Export everything to CSV whenever you want</li>
         </ul>
         <p><a href={`${base}/privacy`}>Read the full privacy policy →</a></p>
@@ -244,6 +413,72 @@ const monthlySteps = [
       </div>
     </div>
   </section>
+
+  <script is:inline define:vars={{ base, defaultTheme }}>
+    (function () {
+      function currentTheme() {
+        var t = document.documentElement.getAttribute('data-theme');
+        if (t) return t;
+        try { return localStorage.getItem('allocate-theme') || defaultTheme; } catch (e) {}
+        return defaultTheme;
+      }
+      function applyMedia(theme) {
+        // Feature-row screenshots
+        document.querySelectorAll('img[data-shot]').forEach(function (img) {
+          var name = img.getAttribute('data-shot');
+          img.style.display = '';
+          // restore a stacked overlay figure that a previous theme may have hidden
+          var front = img.closest('.shot-stack__front');
+          if (front) front.style.display = '';
+          img.src = base + '/screenshots/' + theme + '/' + name + '.png';
+        });
+        // Hero demo video
+        var v = document.querySelector('video[data-demo]');
+        if (v) {
+          v.setAttribute('poster', base + '/screenshots/' + theme + '/home.png');
+          v.querySelectorAll('source[data-demo-src]').forEach(function (s) {
+            var kind = s.getAttribute('data-demo-src');
+            s.src = base + '/demo-' + theme + '.' + kind;
+          });
+          v.load();
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      }
+      // Swap when any theme control is clicked (Header arrays removed; the
+      // theme cards on this page are the source of truth).
+      document.querySelectorAll('[data-set-theme]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          applyMedia(b.getAttribute('data-set-theme'));
+        });
+      });
+      // Initial sync (in case a non-default theme was restored from storage).
+      var t = currentTheme();
+      if (t !== defaultTheme) applyMedia(t);
+    })();
+  </script>
+
+  <script is:inline>
+    // Gentle scroll-reveal for feature rows. Reveal-all fallback if the browser
+    // lacks IntersectionObserver or the visitor prefers reduced motion.
+    (function () {
+      var nodes = document.querySelectorAll('[data-reveal]');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        nodes.forEach(function (n) { n.classList.add('is-in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+      nodes.forEach(function (n) { io.observe(n); });
+    })();
+  </script>
 </Layout>
 
 <style>
@@ -254,14 +489,14 @@ const monthlySteps = [
     background:
       radial-gradient(
         120% 90% at 85% -10%,
-        color-mix(in srgb, var(--accent) 16%, transparent),
+        color-mix(in srgb, var(--accent) 18%, transparent),
         transparent 55%
       );
   }
   .hero__inner {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: var(--space-3xl);
+    grid-template-columns: 0.82fr 1.18fr;
+    gap: var(--space-4xl);
     align-items: center;
   }
   .hero__copy h1 {
@@ -279,51 +514,365 @@ const monthlySteps = [
   }
   /* Hero screenshot bleeds toward the right edge */
   .hero__media {
-    margin-right: calc(-1 * var(--space-3xl));
+    margin-right: calc(-1 * var(--space-4xl));
   }
 
-  /* macOS window frame */
-  .window {
+  /* Signature: the "pay yourself first" allocation bar. */
+  .paybar {
+    margin: var(--space-2xl) 0 0;
+    max-width: 30rem;
+  }
+  .paybar__cap {
+    font-size: 0.9rem;
+    margin: 0 0 var(--space-s);
+  }
+  .paybar__cap b {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .paybar__track {
+    position: relative;
+    height: 14px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .paybar__you {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 26%;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+    transform-origin: left center;
+  }
+  .paybar__keys {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-m);
+    margin-top: var(--space-s);
+    font-size: 0.86rem;
+  }
+  .paybar__key--you {
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+  .paybar__key--you b { font-weight: 800; }
+  .paybar__key--rest { color: var(--text-faint); }
+
+  /* Hero load: one quiet, orchestrated entrance. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__copy > * {
+      animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .hero__copy > :nth-child(1) { animation-delay: 0.02s; }
+    .hero__copy > :nth-child(2) { animation-delay: 0.10s; }
+    .hero__copy > :nth-child(3) { animation-delay: 0.18s; }
+    .hero__copy > :nth-child(4) { animation-delay: 0.26s; }
+    .hero__copy > :nth-child(5) { animation-delay: 0.34s; }
+    .hero__copy > :nth-child(6) { animation-delay: 0.42s; }
+    .hero__media {
+      animation: hero-fade 0.9s ease 0.2s both;
+    }
+    .paybar__you {
+      width: 0;
+      animation: paybar-fill 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    }
+    @keyframes hero-rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes hero-fade {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes paybar-fill {
+      to { width: 26%; }
+    }
+  }
+
+  /* Clean rounded screenshot / video panel (shared shape with FeatureRow) */
+  .shot {
+    margin: 0;
     border-radius: 14px;
     overflow: hidden;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-window);
   }
-  .window__bar {
-    display: flex;
-    align-items: center;
-    gap: var(--space-s);
-    height: 36px;
-    padding: 0 var(--space-l);
-    background: var(--bg-subtle);
-    border-bottom: 1px solid var(--border);
+  .shot__body {
+    background: var(--bg);
   }
-  .window__bar .dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--border);
-  }
-  .window__bar .dot:nth-child(1) {
-    background: #ff5f57;
-  }
-  .window__bar .dot:nth-child(2) {
-    background: #febc2e;
-  }
-  .window__bar .dot:nth-child(3) {
-    background: #28c840;
-  }
-  .window img {
+  .shot__body img {
     display: block;
     width: 100%;
     height: auto;
+  }
+  .shot__body video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .shot__ph {
+    aspect-ratio: 16 / 10;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-m);
+    color: var(--text-faint);
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 14px,
+      color-mix(in srgb, var(--text-faint) 6%, transparent) 14px,
+      color-mix(in srgb, var(--text-faint) 6%, transparent) 28px
+    );
+  }
+  .shot__ph svg { width: 56px; height: 56px; opacity: 0.7; }
+  .shot__ph span { font-size: 0.95rem; font-weight: 500; }
+  .shot--hero .shot__ph { aspect-ratio: 16 / 9; }
+
+  /* Pay Yourself First — themed stat panel (re-themes live, no screenshot) */
+  .pyf {
+    display: grid;
+    gap: var(--space-l);
+    padding: var(--space-2xl);
+    background: var(--bg-elevated);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+  .pyf__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+  }
+  .pyf__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .pyf__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--success);
+    background: color-mix(in srgb, var(--success) 16%, transparent);
+  }
+  .pyf__pill::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+  .pyf__rate {
+    display: grid;
+    gap: var(--space-xs);
+  }
+  .pyf__rate strong {
+    font-size: clamp(3.2rem, 7vw, 4.6rem);
+    line-height: 0.95;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .pyf__rate strong span {
+    font-size: 0.45em;
+    color: var(--accent-strong);
+    margin-left: 0.1em;
+  }
+  .pyf__rate-label {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    max-width: 30ch;
+  }
+  .pyf__bar {
+    position: relative;
+    height: 12px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    margin-top: var(--space-xs);
+  }
+  .pyf__bar-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  }
+  .pyf__bar-target {
+    position: absolute;
+    top: -1.7rem;
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .pyf__bar-target i {
+    position: absolute;
+    top: 1.35rem;
+    left: 50%;
+    width: 2px;
+    height: 18px;
+    background: var(--text-faint);
+    opacity: 0.6;
+  }
+  .pyf__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-m);
+    margin-top: var(--space-s);
+  }
+  .pyf__stat {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 0.5rem;
+    padding: var(--space-m);
+    border-radius: var(--radius-card);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+  }
+  .pyf__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .pyf__dot--saved { background: var(--success); }
+  .pyf__dot--invested { background: var(--success-light); }
+  .pyf__stat-k {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .pyf__stat b {
+    grid-column: 2;
+    font-size: 1.15rem;
+    color: var(--text);
+  }
+  .pyf__foot {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-faint);
+  }
+  .pyf__foot b { color: var(--text-muted); }
+
+  /* Stacked screenshots (Transactions) */
+  .shot-stack {
+    position: relative;
+    padding-bottom: 64px;
+    padding-right: 28px;
+  }
+  .shot-stack__back {
+    margin: 0;
+  }
+  .shot-stack__front {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 62%;
+    margin: 0;
+    box-shadow: var(--shadow-window);
+  }
+  @media (max-width: 880px) {
+    .shot-stack {
+      padding-bottom: 48px;
+      padding-right: 0;
+    }
+    .shot-stack__front { width: 72%; }
+  }
+  /* Pay Yourself First headline: budget card behind, PYF card in front */
+  .shot-stack--pyf { padding-bottom: 72px; padding-right: 40px; }
+  .shot-stack--pyf .shot-stack__back { width: 72%; }
+  .shot-stack--pyf .shot-stack__front { width: 56%; }
+
+  /* Intro band */
+  .intro {
+    padding-top: var(--space-2xl);
+  }
+  .intro__headline {
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+  .intro__lead {
+    margin-inline: auto;
+    margin-bottom: var(--space-xl);
+  }
+  .intro__chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-s);
+  }
+  .intro__chips li {
+    padding: 0.4rem 0.95rem;
+    border-radius: var(--radius-pill);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   /* Feature rows */
   .feature-rows {
     display: grid;
     gap: var(--space-5xl);
+  }
+
+  /* Custom feature rows defined in this page need the same layout the
+     FeatureRow component carries (its styles are component-scoped). */
+  .frow {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-4xl);
+    align-items: center;
+  }
+  .frow--flip .frow__copy {
+    order: 2;
+  }
+  .frow__title {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    margin-bottom: var(--space-m);
+  }
+  .frow__body {
+    font-size: 1.12rem;
+    margin: 0;
+    max-width: 44ch;
+  }
+  .frow__list {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-s);
+    max-width: 44ch;
+  }
+  .frow__list li {
+    position: relative;
+    padding-left: 1.7rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+  .frow__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    width: 11px;
+    height: 7px;
+    border-left: 2.4px solid var(--accent-strong);
+    border-bottom: 2.4px solid var(--accent-strong);
+    transform: rotate(-45deg);
   }
 
   /* Secondary feature grid */
@@ -334,10 +883,76 @@ const monthlySteps = [
     margin-top: var(--space-3xl);
   }
 
+  /* Themes showcase */
+  .themes__lead {
+    margin-inline: auto;
+    margin-bottom: var(--space-2xl);
+  }
+  .themes__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-l);
+  }
+  .themecard {
+    display: grid;
+    gap: var(--space-s);
+    padding: var(--space-s);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    cursor: pointer;
+    font: inherit;
+    text-align: center;
+    transition: transform 0.12s ease, border-color 0.12s ease;
+  }
+  .themecard:hover {
+    transform: translateY(-2px);
+    border-color: var(--text-faint);
+  }
+  .themecard__swatch {
+    position: relative;
+    display: block;
+    height: 76px;
+    border-radius: var(--radius-sm);
+    background: var(--c-bg);
+    border: 1px solid color-mix(in srgb, var(--c-text) 16%, transparent);
+    overflow: hidden;
+  }
+  .themecard__line {
+    position: absolute;
+    left: 12%;
+    height: 6px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--c-text) 55%, var(--c-bg));
+  }
+  .themecard__line--lg {
+    top: 24%;
+    width: 56%;
+    background: var(--c-text);
+  }
+  .themecard__line:not(.themecard__line--lg) {
+    top: 44%;
+    width: 40%;
+  }
+  .themecard__pill {
+    position: absolute;
+    left: 12%;
+    bottom: 18%;
+    width: 34%;
+    height: 14px;
+    border-radius: var(--radius-pill);
+    background: var(--c-accent);
+  }
+  .themecard__name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
   /* Privacy */
   .privacy {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: var(--space-3xl);
     align-items: center;
   }
@@ -453,6 +1068,11 @@ const monthlySteps = [
     margin-top: var(--space-xl);
   }
 
+  @media (max-width: 1024px) {
+    .themes__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
   @media (max-width: 880px) {
     .hero__inner,
     .privacy {
@@ -468,6 +1088,13 @@ const monthlySteps = [
     .feature-rows {
       gap: var(--space-4xl);
     }
+    .frow {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+    .frow--flip .frow__copy {
+      order: 0;
+    }
     .steps,
     .steps--2 {
       grid-template-columns: 1fr;
@@ -481,5 +1108,9 @@ const monthlySteps = [
     .steps--4 {
       grid-template-columns: 1fr;
     }
+    .themes__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>
+</content>
