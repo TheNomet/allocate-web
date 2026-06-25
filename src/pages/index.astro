@@ -166,33 +166,30 @@ const monthlySteps = [
           </ul>
         </div>
         <div class="frow__media">
-          <figure class="shot pyf" aria-label="Pay Yourself First rate of 26%, on track against a 20% annual target">
-            <div class="pyf__head">
-              <span class="pyf__eyebrow">Pay Yourself First</span>
-              <span class="pyf__pill">On track</span>
-            </div>
-            <div class="pyf__rate">
-              <strong>26<span>%</span></strong>
-              <span class="pyf__rate-label">of income kept, saved &amp; invested this month</span>
-            </div>
-            <div class="pyf__bar" role="img" aria-label="26 percent versus a 20 percent target">
-              <span class="pyf__bar-fill" style="width:26%"></span>
-              <span class="pyf__bar-target" style="left:20%"><i></i>20% target</span>
-            </div>
-            <div class="pyf__split">
-              <div class="pyf__stat">
-                <span class="pyf__dot pyf__dot--saved"></span>
-                <span class="pyf__stat-k">Saved</span>
-                <b>kr 0</b>
+          <div class="shot-stack shot-stack--pyf">
+            <figure class="shot shot-stack__back">
+              <div class="shot__body">
+                <img
+                  src={`${base}/screenshots/${defaultTheme}/budget_progress.png`}
+                  data-shot="budget_progress"
+                  alt="Budget Progress card: fixed expenses, variable expenses, savings, and investments against their targets"
+                  loading="lazy"
+                  onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.src.replace(/screenshots\/[^/]+\//,'screenshots/rosepine-dawn/');}"
+                />
               </div>
-              <div class="pyf__stat">
-                <span class="pyf__dot pyf__dot--invested"></span>
-                <span class="pyf__stat-k">Invested</span>
-                <b>kr 16 000</b>
+            </figure>
+            <figure class="shot shot-stack__front">
+              <div class="shot__body">
+                <img
+                  src={`${base}/screenshots/${defaultTheme}/PYF_progress.png`}
+                  data-shot="PYF_progress"
+                  alt="Pay Yourself First card: the share of income kept, saved, and invested this month against the target"
+                  loading="lazy"
+                  onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=this.src.replace(/screenshots\/[^/]+\//,'screenshots/rosepine-dawn/');}"
+                />
               </div>
-            </div>
-            <p class="pyf__foot">You set aside <b>kr 16 000</b> of kr 61 000 income.</p>
-          </figure>
+            </figure>
+          </div>
         </div>
       </div>
 
@@ -790,6 +787,10 @@ const monthlySteps = [
     }
     .shot-stack__front { width: 72%; }
   }
+  /* Pay Yourself First headline: budget card behind, PYF card in front */
+  .shot-stack--pyf { padding-bottom: 72px; padding-right: 40px; }
+  .shot-stack--pyf .shot-stack__back { width: 72%; }
+  .shot-stack--pyf .shot-stack__front { width: 56%; }
 
   /* Intro band */
   .intro {
