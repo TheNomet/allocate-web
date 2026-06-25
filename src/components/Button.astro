@@ -43,12 +43,19 @@ const target = external ? '_blank' : undefined;
     text-decoration: none;
     transform: translateY(-1px);
   }
+  .btn:active {
+    transform: translateY(0);
+  }
   .btn--primary {
     background: var(--accent);
     color: var(--on-accent);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--accent) 30%, transparent),
+      0 10px 24px color-mix(in srgb, var(--accent) 22%, transparent);
   }
   .btn--primary:hover {
     background: var(--accent-strong);
+    box-shadow: 0 2px 4px color-mix(in srgb, var(--accent) 34%, transparent),
+      0 14px 30px color-mix(in srgb, var(--accent) 26%, transparent);
   }
   .btn--secondary {
     background: transparent;
