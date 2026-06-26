@@ -12,6 +12,11 @@ export const SITE = {
   // Points at this PUBLIC website repo so the DMG is downloadable without
   // login — the app source repo can stay private; upload the .dmg here.
   releasesUrl: 'https://github.com/TheNomet/allocate-web/releases/latest',
+  // Stable direct-download URL for the latest signed DMG. The release
+  // script re-uploads this fixed-name asset every release, so the link
+  // never changes and clicking it downloads immediately (GitHub serves
+  // release assets as attachments) instead of opening the release page.
+  downloadUrl: 'https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate-latest.dmg',
   requirements: 'macOS 14 Sonoma or later',
   released: true, // flip to true when a DMG is published to Releases
 };
