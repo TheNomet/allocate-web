@@ -13,7 +13,7 @@ export const SITE = {
   // login — the app source repo can stay private; upload the .dmg here.
   releasesUrl: 'https://github.com/TheNomet/allocate-web/releases/latest',
   requirements: 'macOS 14 Sonoma or later',
-  released: false, // flip to true when a DMG is published to Releases
+  released: true, // flip to true when a DMG is published to Releases
 };
 
 // Cloudflare Web Analytics token. Paste the token from your Cloudflare
