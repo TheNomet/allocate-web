@@ -64,7 +64,11 @@ const sections = [
       },
       {
         q: 'What’s the difference between keyword and natural-language rules?',
-        a: 'A keyword rule matches text (e.g. “Rema 1000” → Groceries) instantly and deterministically. A natural-language rule describes intent in plain words and lets the AI apply it.',
+        a: 'A keyword rule matches text (e.g. “Rema 1000” → Groceries) instantly and deterministically. A natural-language rule describes intent in plain words and lets the AI apply it. On the Rules screen the two live in separate, collapsible sections.',
+      },
+      {
+        q: 'Can I give the AI my own instructions?',
+        a: 'Yes. Under Settings → Data you can type free-form instructions — “treat anything from Vipps as a transfer”, say — that the AI applies on top of your rules when categorizing. You can also export the full prompt it uses (built-in instructions plus your categories, rules, and custom instructions) as a Markdown file.',
       },
     ],
   },
@@ -74,6 +78,10 @@ const sections = [
       {
         q: 'How does Allocate match transfers between my accounts?',
         a: 'When a move shows up as a debit on one statement and a credit on another, Allocate pairs them automatically — opposite amounts, within a few days, on different accounts. If two moves could match, it asks you instead of guessing.',
+      },
+      {
+        q: 'A transaction shows as money in when it should be money out (or vice versa). Can I fix it?',
+        a: 'Yes. Open the transaction and use “Flip Sign” to switch it between money out and money in. On import, Allocate also reconciles the transactions against the statement’s balance and corrects stray sign errors on its own — flagging anything it can’t safely resolve for you to check.',
       },
       {
         q: 'Why doesn’t moving money to savings show up as spending?',
@@ -116,6 +124,10 @@ const sections = [
       {
         q: 'Does it track my investment growth or stock prices?',
         a: 'Not in v1. Investment accounts reflect the money you’ve put in, not market gains, so net worth undershoots a rising portfolio. Live prices are planned for a later release.',
+      },
+      {
+        q: 'Can I see how each account contributed over time?',
+        a: 'Yes. The net-worth trend has a “By account” view that draws one line per account (when you have more than one). Hover any month for a tooltip of each account’s balance, and tap the legend to show or hide individual accounts.',
       },
       {
         q: 'My net worth didn’t move even though I saved money. Why?',
