@@ -22,16 +22,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
-      // Apply the saved accent theme before paint (no flash), and flag that JS
-      // is live so reveal animations can hide content safely.
+      // Theme switching is currently disabled on the site (only the default
+      // theme's marketing media is up to date). Pin to rosepine-dawn regardless
+      // of any theme a returning visitor may have saved earlier. To re-enable
+      // the switcher, restore the localStorage read here and the "Make it yours"
+      // section + [data-set-theme] listeners.
       (function () {
         document.documentElement.classList.add('js');
-        try {
-          var t = localStorage.getItem('allocate-theme') || 'rosepine-dawn';
-          document.documentElement.setAttribute('data-theme', t);
-        } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'rosepine-dawn');
-        }
+        document.documentElement.setAttribute('data-theme', 'rosepine-dawn');
       })();
     </script>
     <title>{pageTitle}</title>

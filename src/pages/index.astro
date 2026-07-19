@@ -199,11 +199,11 @@ const monthlySteps = [
         name="net-worth"
         alt="Net Worth page with a history trend chart and per-account breakdown"
         flip
-        bullets={['Every account in one figure', 'History trend, overall or by account', 'Credit cards counted as liabilities']}
+        bullets={['Every account in one figure', 'History trend, overall or by account', 'Cash vs. invested, split out over time']}
       >
         Watch the number that compounds. Net Worth pulls every account together —
         checking, savings, investments, even credit cards — and charts how your
-        contributions add up over time. Real money in, not market guesswork.
+        wealth grows over time, splitting cash from what you’ve invested.
       </FeatureRow>
 
       <FeatureRow
@@ -233,58 +233,30 @@ const monthlySteps = [
       </FeatureRow>
 
       <FeatureRow
+        eyebrow="Track your investments"
+        title="Your whole portfolio, in one place"
+        name="portfolio"
+        alt="Portfolio page with per-holding value, cost basis, return, and a performance chart"
+        bullets={['Per-holding value, cost basis, and return', 'A performance chart over time', 'Prices refresh automatically, and feed net worth']}
+      >
+        Import a brokerage statement and Allocate builds a per-holding view —
+        each fund’s market value, cost basis, and return in kroner and percent,
+        with a performance chart over time. Your holdings roll straight into net
+        worth, so cash and investments finally live together.
+      </FeatureRow>
+
+      <FeatureRow
         eyebrow="Private by default"
         title="Import a statement, let AI sort it"
         name="import"
         alt="Import review screen with AI-categorized transactions"
+        flip
         bullets={['PDF, CSV & Excel — even several at once', 'Runs on your Mac, or falls back to your own ChatGPT', 'Review, fix, and teach it rules as you go']}
       >
         Export a PDF, CSV, or Excel file from your bank and drop it in. The AI
         categorizes every transaction by purpose — and it runs on your Mac. No
         bank connection, and your statements aren’t sent to our servers.
       </FeatureRow>
-
-      <div class="frow frow--flip" data-reveal>
-        <div class="frow__copy">
-          <p class="eyebrow">Every krone accounted for</p>
-          <h3 class="frow__title">All your accounts, one clean list</h3>
-          <p class="frow__body text-muted">
-            Filter, sort, re-categorize in bulk, add notes, and build rules that
-            stick. Transfers between your own accounts pair up automatically, so a
-            move from checking to savings never double-counts as spending.
-          </p>
-          <ul class="frow__list">
-            <li>Multi-account, one searchable view</li>
-            <li>Keyword &amp; natural-language rules</li>
-            <li>Export anything to CSV</li>
-          </ul>
-        </div>
-        <div class="frow__media">
-          <div class="shot-stack">
-            <figure class="shot shot-stack__back">
-              <div class="shot__body">
-                <img
-                  src={`${base}/screenshots/${defaultTheme}/transactions.png`}
-                  data-shot="transactions"
-                  alt="Transactions list with categories and amounts across accounts"
-                  loading="lazy"
-                />
-              </div>
-            </figure>
-            <figure class="shot shot-stack__front">
-              <div class="shot__body">
-                <img
-                  src={`${base}/screenshots/${defaultTheme}/transactions-match.png`}
-                  data-shot="transactions-match"
-                  alt="Auto-matched transfer pairing two accounts into one internal transfer"
-                  loading="lazy"
-                  onerror="this.closest('.shot-stack__front').style.display='none';"
-                />
-              </div>
-            </figure>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -308,19 +280,20 @@ const monthlySteps = [
       <h2>Themes that feel right at home.</h2>
       <p class="lead themes__lead">
         Allocate ships with Rosé Pine Dawn and a set of beloved editor themes —
-        Nord, Catppuccin, Tokyo Night and more. Tap one to preview it right here.
+        Nord, Catppuccin, Tokyo Night, Rosé Pine, and Gruvbox — with accent
+        colors, light and dark modes, and adjustable type.
       </p>
       <div class="themes__grid">
         {
           themes.map((t) => (
-            <button type="button" class="themecard" data-set-theme={t.id} style={`--c-bg:${t.bg};--c-accent:${t.accent};--c-text:${t.text}`}>
+            <div class="themecard" style={`--c-bg:${t.bg};--c-accent:${t.accent};--c-text:${t.text}`}>
               <span class="themecard__swatch">
                 <span class="themecard__line themecard__line--lg" />
                 <span class="themecard__line" />
                 <span class="themecard__pill" />
               </span>
               <span class="themecard__name">{t.name}</span>
-            </button>
+            </div>
           ))
         }
       </div>
@@ -929,14 +902,8 @@ const monthlySteps = [
     border-radius: var(--radius-card);
     border: 1px solid var(--border);
     background: var(--bg-elevated);
-    cursor: pointer;
     font: inherit;
     text-align: center;
-    transition: transform 0.12s ease, border-color 0.12s ease;
-  }
-  .themecard:hover {
-    transform: translateY(-2px);
-    border-color: var(--text-faint);
   }
   .themecard__swatch {
     position: relative;

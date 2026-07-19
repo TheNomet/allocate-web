@@ -92,6 +92,10 @@ const sections = [
         a: 'Open “Review transfers” to confirm, change, or unpair any match by hand. Auto-matching only happens when it’s unambiguous; everything is visible and reversible.',
       },
       {
+        q: 'I edited a paired transfer’s category by mistake. Can I undo it?',
+        a: 'Yes. On any confirmed pair, “Reset to default” re-derives both legs from the accounts involved (Internal Transfer, Credit Card Payment, or a promoted Savings) while keeping the pairing. Settings → Transfers has a bulk “Reset to default” that does this for every confirmed pair at once. You can also filter the Transfers screen by account and change either side’s category right there.',
+      },
+      {
         q: 'How are credit cards handled?',
         a: 'A card’s balance counts as a liability against your net worth. You choose whether card spending lands in the month you bought (transaction month) or the month you’re billed (bill month) — globally, or per card.',
       },
@@ -123,7 +127,11 @@ const sections = [
       },
       {
         q: 'Does it track my investment growth or stock prices?',
-        a: 'Not in v1. Investment accounts reflect the money you’ve put in, not market gains, so net worth undershoots a rising portfolio. Live prices are planned for a later release.',
+        a: 'Yes. Import a brokerage statement and the Portfolio screen tracks each holding’s market value, cost basis, and return — in kroner and percent — with a performance chart over time. Prices refresh automatically, and your holdings feed into net worth, so a rising portfolio shows up as real gains rather than just the money you put in.',
+      },
+      {
+        q: 'Can I split my wealth between cash and investments?',
+        a: 'Yes. Net worth has a “Cash vs. invested” chart that separates the cash sitting in your accounts from the money you’ve invested, and totals them over time — so buying funds shows as invested instead of seeming to disappear.',
       },
       {
         q: 'Can I see how each account contributed over time?',
