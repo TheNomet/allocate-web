@@ -3,6 +3,22 @@
     <channel>
         <title>Allocate</title>
         <item>
+            <title>1.9.3</title>
+            <pubDate>Tue, 01 Sep 2026 14:38:48 +0200</pubDate>
+            <sparkle:version>18</sparkle:version>
+            <sparkle:shortVersionString>1.9.3</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:releaseNotesLink>https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate-1.9.3.html</sparkle:releaseNotesLink>
+            <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate-1.9.3.dmg" length="10375260" type="application/octet-stream" sparkle:edSignature="J9xnOnCMCw7vag7w/6W9PYQMbyg/V5fEyV30nI7YKGoNF0TStiwn4t7UQHWrCo/paFtU7kRtAQKU1TVBY5bDAQ=="/>
+            <sparkle:deltas>
+                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate18-17.delta" sparkle:deltaFrom="17" length="647618" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="v7TWELDtrwLH1uNTgpfSyA4xFkKFMm8ONpictgx39yYDFoUKciIYxTCecMmvbIFMx9BEr/h9am7/ElxyNnx5Ag=="/>
+                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate18-16.delta" sparkle:deltaFrom="16" length="905606" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="Vp7i+6JfeX9ad1tQr+sLyDQ1A9sMl7xgaLxUggZvSq4363/LF9HzDgdzOdXite/Clg/xx22lrhNDzB40L0PCDQ=="/>
+                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate18-15.delta" sparkle:deltaFrom="15" length="1150442" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="vkU8DhR5hm8Iua+5xMOtoGH18/CL4kSxvx+Dp2dbLKnOnmXN0iLsCPE5M6s1ERFuan8nEUqOlF/xSfeGgKR8CQ=="/>
+                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate18-14.delta" sparkle:deltaFrom="14" length="1576882" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="OVwOfp4mitPAuRn25wiNdTogSU2pG1NPl1Ih+nGqZlZzRrfVGv0VNZVPb4+8Ih4wevVMc6R7ks2FZiWfE4YqBg=="/>
+                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate18-13.delta" sparkle:deltaFrom="13" length="1634490" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="eNXfyK+Ge67Bd5u5jpWio/r5guJ9TBhh3lmFqgPkrstxdCbUBWgjvwesEb31skQPjr2TPdyMdWj3+zOPbYHxDA=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.9.2</title>
             <pubDate>Tue, 01 Sep 2026 14:09:08 +0200</pubDate>
             <sparkle:version>17</sparkle:version>
@@ -32,22 +48,6 @@
                 <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate16-13.delta" sparkle:deltaFrom="13" length="1627746" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="ldZXYxQ1+AIU306AYDxLMG9rAa+DpLoufRt5hwyJapVAurfvRmID4P/Zqzb+YV/dOp5EmwZdY7Box+TtsLUpCQ=="/>
                 <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate16-12.delta" sparkle:deltaFrom="12" length="2383082" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="ih5RwZ9neKn4i42KrChOL4tHCHszcdeCW3IAaYEWjtKaalyNIxW+d5sih/ulOb263GnBe/y+EEp6nFukubihDg=="/>
                 <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate16-11.delta" sparkle:deltaFrom="11" length="2540482" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="NbHZ/0JmKmxnNyzM8KNi7pjOdCKwFzs15vhYRdfCx3NAk5ouHomhTzwYW1X89Q1OX3qjUjadDv9RZwfxRLIFAQ=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.9.0</title>
-            <pubDate>Mon, 31 Aug 2026 21:45:12 +0200</pubDate>
-            <sparkle:version>15</sparkle:version>
-            <sparkle:shortVersionString>1.9.0</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <sparkle:releaseNotesLink>https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate-1.9.0.html</sparkle:releaseNotesLink>
-            <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate-1.9.0.dmg" length="10352965" type="application/octet-stream" sparkle:edSignature="GjTwBAEjU77L3TwEA10PcbtcFPTctU3qnCzinmdefUt9jHbQxCpikwgz05f2zYWXnVhk94SFrRmSRVgKUD/IAA=="/>
-            <sparkle:deltas>
-                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate15-14.delta" sparkle:deltaFrom="14" length="1501710" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="1czZPG1oDeAKO0R0b39yVzQFNDp1CTM1bBsQ5gV26nqypQ1RLT8ralXG1R7/pfcXecQugW0JR/Kjh3GaTWf1Dw=="/>
-                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate15-13.delta" sparkle:deltaFrom="13" length="1566550" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="PfqV1kGhWGs8L8+0RQGdmGwH4hwPpWzmXp2xN4VIIf0sJ9P1wr4m9t21MLCZZc/NFL3eBrYCzugel6knliPlCg=="/>
-                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate15-12.delta" sparkle:deltaFrom="12" length="2357326" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="EUBzbVWp28xpASodl9a5pRskoGUEEiKrfeVF+g1wjkOnyeLe3lGd1XeLuvkbpZMG17ZQ0+C246WiAW6mRM04BA=="/>
-                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate15-11.delta" sparkle:deltaFrom="11" length="2511282" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="iXRy4ezc8SC03W2nEFXSUqVozX2eGX10KfyZmj2LStTLtHm5Q8cVWOo0XFSY/CVhEq9vkUNi8eL0sbzMjVs+Bg=="/>
-                <enclosure url="https://github.com/TheNomet/allocate-web/releases/download/appcast/Allocate15-10.delta" sparkle:deltaFrom="10" length="2569450" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="977840" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="LiC/Gtxr6kHQpPZqmce0PuCDZs13IoQvBrrj9n6YFEzTYtYdyrigfqzjLeNyKZYDHghaSjZRdzoUzTHtXN0YAA=="/>
             </sparkle:deltas>
         </item>
     </channel>
